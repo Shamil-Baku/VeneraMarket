@@ -59,8 +59,7 @@ public class MehsullarDaoImple extends AbstractDAO implements MehsullarDaoInter 
         return new Mehsullar(id, id2, barcode, name, number, priceOfBuying, priceOfSell, seasonId, category, subCategory, billingNum, sayi, status);
     }
 
-  
-    private double salesQuantity (ResultSet rs) throws Exception {
+    private int salesQuantity(ResultSet rs) throws Exception {
 
         int id = rs.getInt("id");
         String name = rs.getString("Malin_adi");
@@ -69,7 +68,7 @@ public class MehsullarDaoImple extends AbstractDAO implements MehsullarDaoInter 
         return (number);
     }
 
-private double creditQuantity (ResultSet rs) throws Exception {
+    private int creditQuantity(ResultSet rs) throws Exception {
 
         int id = rs.getInt("id");
         String name = rs.getString("Borca_goturduyu_mehsul");
@@ -78,8 +77,6 @@ private double creditQuantity (ResultSet rs) throws Exception {
         return (number);
     }
 
-    
-    
     private Mehsullar getProduct3(ResultSet rs) throws Exception {
 
         int id = rs.getInt("id");
@@ -103,12 +100,11 @@ private double creditQuantity (ResultSet rs) throws Exception {
 //
 //        return new Mehsullar(billingNum);
 //    }
-
     @Override
     public List<Mehsullar> getAllProduct() {
         List<Mehsullar> result = new ArrayList<>();
 
-        try (Connection c = connect()) {
+        try ( Connection c = connect()) {
 
             Statement stmt = c.createStatement();
             stmt.execute("SELECT\n"
@@ -151,7 +147,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         List<Mehsullar> result = new ArrayList<>();
 
-        try (Connection c2 = connect()) {
+        try ( Connection c2 = connect()) {
 
             Statement stmt = c2.createStatement();
             stmt.execute("SELECT\n"
@@ -187,7 +183,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         Mehsullar result = null;
 
-        try (Connection c2 = connect()) {
+        try ( Connection c2 = connect()) {
 
             Statement stmt = c2.createStatement();
             stmt.execute("SELECT\n"
@@ -224,7 +220,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         List<Mehsullar> result = new ArrayList<>();
 
-        try (Connection c2 = connect()) {
+        try ( Connection c2 = connect()) {
 
             Statement stmt = c2.createStatement();
             stmt.execute("SELECT\n"
@@ -266,7 +262,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         List<Mehsullar> result = new ArrayList<>();
 
-        try (Connection c2 = connect()) {
+        try ( Connection c2 = connect()) {
 
             Statement stmt = c2.createStatement();
             stmt.execute("SELECT\n"
@@ -301,7 +297,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         List<Mehsullar> result = new ArrayList<>();
 
-        try (Connection c2 = connect()) {
+        try ( Connection c2 = connect()) {
 
             Statement stmt = c2.createStatement();
             stmt.execute("SELECT\n"
@@ -338,7 +334,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
     @Override
     public boolean addProduct(Mehsullar p) {
 
-        try (Connection c = connect()) {
+        try ( Connection c = connect()) {
             PreparedStatement stmt = c.prepareStatement("insert into user(Malin_adi, Miqdari,Alis_qiymeti, Movsum_id,Kateqoriya_id, Alt_kateqoriya_id, Alis_Tarixi) values(?,?,?,?,?,?,?)");
 
             stmt.setString(1, p.getName());
@@ -560,7 +556,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         Integer i = 0;
 
-        try (Connection c = connect()) {
+        try ( Connection c = connect()) {
 
             Statement stmt = c.createStatement();
             stmt.execute("select * from sebet");
@@ -691,7 +687,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
                 String qurumAdi = rs.getString("QurumAdi");
                 float qaimeNum = rs.getFloat("QaimeNum");
 
-                try (Connection c2 = connect()) {
+                try ( Connection c2 = connect()) {
 
                     pres = c.prepareStatement("insert into qaimemehsullari ( id, Malin_adi, Miqdari, Alis_qiymeti, Alisin_toplam_deyer,Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Barcode, Kimden, QurumAdi, QaimeNum, Alis_Tarixi ) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                     //ResultSet rss = stmt3.getResultSet();
@@ -788,7 +784,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         Mehsullar result = null;
 
-        try (Connection c = connect()) {
+        try ( Connection c = connect()) {
 
             Statement stmt = c.createStatement();
             stmt.execute("SELECT\n"
@@ -884,8 +880,8 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
     @Override
     public Mehsullar getMehsulByIdAcilanQaime(int id) {
-        
-     Mehsullar result = null;
+
+        Mehsullar result = null;
 
         try {
 
@@ -907,16 +903,13 @@ private double creditQuantity (ResultSet rs) throws Exception {
         }
 
         return result;
-    
-    
-    
+
     }
 
     @Override
     public Mehsullar getAllProduct3() {
-        
-    
-      Mehsullar result = null;
+
+        Mehsullar result = null;
 
         try ( Connection c = connect()) {
 
@@ -936,12 +929,37 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
         return result;
 
-    
     }
-    
-     @Override
+
+    @Override
+    public Mehsullar getAllProductFromSebet() {
+
+        Mehsullar result = null;
+
+        try ( Connection c = connect()) {
+
+            Statement stmt = c.createStatement();
+            stmt.execute("SELECT * from sebet");
+            ResultSet rs = stmt.getResultSet();
+
+            while (rs.next()) {
+                result = getProduct(rs);
+
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+    @Override
     public double exploreProductSalesQuantityById(int id) {
-  double say = 0;
+
+        double say = 0;
         double netice = 0;
 
         try {
@@ -977,7 +995,8 @@ private double creditQuantity (ResultSet rs) throws Exception {
 
     @Override
     public double exploreProductCreditQuantityById(int id) {
-   double say = 0;
+
+        double say = 0;
         double netice = 0;
 
         try {
@@ -1029,7 +1048,7 @@ private double creditQuantity (ResultSet rs) throws Exception {
                     + "	where s.id = " + id);
             ResultSet rs = stmt.getResultSet();
 
-           while (rs.next()) {
+            while (rs.next()) {
                 result = getProduct4(rs);
 
             }
@@ -1042,12 +1061,6 @@ private double creditQuantity (ResultSet rs) throws Exception {
         return result;
 
     }
-
-    @Override
-    public Mehsullar getAllProductFromSebet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
 }
 
