@@ -1277,7 +1277,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     public void exploreAboutProduct() {
 
-        try {
+     try {
             df = (DefaultTableModel) tblAlinanMallar.getModel();
             int selected = tblAlinanMallar.getSelectedRow();
 
@@ -1287,9 +1287,9 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             Mehsullar mehsul = mehDao.getMehsulById(id);
             Mehsullar qaliq = mehDao.exploreMehsulQaliqById(id);
             Integer satisMiq = mehsul.getNumberOfProduct();
-
-            Integer qaliqsay = 000;
-            System.out.println("budu---> " + qaliqsay);
+            
+            Integer qaliqsay = qaliq.getHowMuchLeft();
+            System.out.println("budu---> "+qaliqsay);
             pres = con.prepareStatement("truncate table detallar;");
             pres.executeUpdate();
 
@@ -1303,11 +1303,11 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             exploreAboutProduct ex = new exploreAboutProduct();
             ex.setVisible(true);
 
-//            Mehsullar explore = mehDao.exploreMehsulById(id);
-//
-//            //int say = explore.size();
-//            explore.getHowMuchSold();
+            //int satisMiq2 = mehDao.exploreMehsulById(id);
 
+            //int say = explore.size();
+
+            
             txtAxtaris.setText(Integer.toString(say));
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

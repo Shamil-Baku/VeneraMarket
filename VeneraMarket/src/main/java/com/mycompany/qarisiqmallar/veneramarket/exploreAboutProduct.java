@@ -15,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
     
 
@@ -214,8 +216,12 @@ public class exploreAboutProduct extends javax.swing.JFrame {
     }
      
       public void exploreAboutProduct() {
-
         try {
+//                   df = (DefaultTableModel) tblAlinanMallar.getModel();
+//
+//        int selected = tblAlinanMallar.getSelectedRow();
+//
+//        int id = Integer.parseInt(df.getValueAt(selected, 1).toString());
 
             pres = con.prepareCall("select * from detallar");
 
@@ -227,17 +233,25 @@ public class exploreAboutProduct extends javax.swing.JFrame {
                 int qaliqSay = rs.getInt("Qaliq_say");
                 System.out.println(id);
                 double satisMiq = mehDao.exploreProductSalesQuantityById(id);
-                double borcdaOlanMehsulSayi = mehDao.exploreProductCreditQuantityById(id);
-                //int say = explore.getHowMuchSold();
-               // int say2 = explore2.size();
+                double borcMiq = mehDao.exploreProductCreditQuantityById(id);
+                
+                //int say = explore.size();
+                //int say2 = explore2.size();
                 txtUmumiSay.setText(Integer.toString(umumiSay));
-                txtBorclar.setText(Double.toString(borcdaOlanMehsulSayi));
+                txtBorclar.setText(Double.toString(borcMiq));
                 txtSatisMiqdari.setText(Double.toString(satisMiq));
                 txtQaliqSay.setText(Integer.toString(qaliqSay));
             }
 
+//            
+//        List<Mehsullar> explore = mehDao.exploreMehsulById(id);
+//
+//        int say = explore.size();
+//        
+//        txtAxtaris.setText(Integer.toString(say));
+//
         } catch (Exception ex) {
-            System.out.println(ex);
+            Logger.getLogger(exploreAboutProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
