@@ -24,6 +24,8 @@ import com.mycompany.entity.Qiymetler;
 import java.awt.event.KeyEvent;
 import com.mycompany.main.Contex;
 import com.mysql.cj.xdevapi.Result;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -84,6 +86,10 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         initComponents();
         connect();
         addMenu();
+        
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
 
         txtSatisTarixi.setText(date2);
         // txtDate.setText(date3);
@@ -172,7 +178,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         txtGizlin = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
         btnGeriQaytar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         cbMehsullar = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -1008,13 +1013,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1046,9 +1044,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                         .addComponent(txtCemMebleg, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(280, 280, 280))
@@ -1072,9 +1068,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                             .addComponent(btnGeriQaytar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnElaveEt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtGizlin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)))
+                        .addComponent(txtGizlin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -1239,39 +1233,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         }
 
     }//GEN-LAST:event_btnGeriQaytarMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        int say = 1;
-        try {
-
-            Statement stmt = con.createStatement();
-            stmt.execute("select * from satilan_mallar");
-            ResultSet rs = stmt.getResultSet();
-
-            while (rs.next()) {
-
-                int number = rs.getInt("Satis_ID");
-                int id = rs.getInt("id");
-
-                if (number != 0 && say < 1995) {
-
-                    Statement stmt2 = con.createStatement();
-                    stmt2.execute("update satilan_mallar s set Satis_ID = " + say + " where Satis_ID = ");
-                    ResultSet rss = stmt.getResultSet();
-                    say++;
-                } else {
-                    System.out.println("Say bitmisdir");
-                }
-
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void delete() {
 
@@ -1860,36 +1821,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     }
 
-    public void umumiMebleg() {
-
-        boolean yoxla = txtUmumi.getText().isEmpty();
-
-        if (yoxla == true) {
-            double s = Double.parseDouble(TextMalinMiqdari.getText());
-
-            double aaa = Double.parseDouble(txtQiymet.getText());
-
-            double cem = (s * aaa);
-
-            txtUmumi.setText(Double.toString(cem));
-
-        } else {
-
-            double kohneCem = Double.parseDouble(txtUmumi.getText());
-            txtGizlin.setText(Double.toString(kohneCem));
-
-            double s = Double.parseDouble(TextMalinMiqdari.getText());
-
-            double aaa = Double.parseDouble(txtQiymet.getText());
-
-            double cem = (s * aaa);
-
-            txtUmumi.setText(Double.toString(cem));
-
-        }
-
-    }
-
+    
     public void sebetinSilinmesi() {
 
         try {
@@ -3482,12 +3414,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
         int selected = tblAlinanMallar.getSelectedRow();
 
-        double kohneumumi = Double.parseDouble(txtCemMebleg.getText());
-
-        double kohneCem = Double.parseDouble(txtGizlin.getText());
-
-        double yeniCemMebleg = kohneumumi - kohneCem;
-
         int id = Integer.parseInt(df.getValueAt(selected, 1).toString());
         int id2 = Integer.parseInt(df.getValueAt(selected, 0).toString());
 
@@ -3624,13 +3550,16 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         // TODO add your handling code here:
     }// GEN-LAST:event_btnCancelActionPerformed
 
-    private void TextMalinMiqdariKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_TextMalinMiqdariKeyReleased
+    private void TextMalinMiqdariKeyReleased(java.awt.event.KeyEvent evt) {
 
+        deyisiklik();
+    }
+    
+    
+    public void deyisiklik(){
+       
         DecimalFormat dformater = new DecimalFormat("#.##");
 
-        boolean yoxla = txtUmumi.getText().isEmpty();
-
-        if (yoxla == true) {
             double s = Double.parseDouble(TextMalinMiqdari.getText());
 
             double aaa = Double.parseDouble(txtQiymet.getText());
@@ -3641,24 +3570,8 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
             txtUmumi.setText(formattedCem);
 
-        } else {
+}
 
-            double kohneCem = Double.parseDouble(txtUmumi.getText());
-            txtGizlin.setText(Double.toString(kohneCem));
-
-            double s = Double.parseDouble(TextMalinMiqdari.getText());
-
-            double aaa = Double.parseDouble(txtQiymet.getText());
-
-            double cem = (s * aaa);
-
-            String formattedCem = dformater.format(cem);
-
-            txtUmumi.setText(formattedCem);
-
-        }
-
-    }// GEN-LAST:event_TextMalinMiqdariKeyReleased
 
     private void txtAlisQiymetiKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtAlisQiymetiKeyReleased
 
@@ -3911,16 +3824,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     private void txtQiymetKeyReleased(java.awt.event.KeyEvent evt) {
 
-        DecimalFormat dformater = new DecimalFormat("#.##");
-
-        double miqdari = Double.parseDouble(TextMalinMiqdari.getText());
-        double alisqiymeti = Double.parseDouble(txtQiymet.getText());
-
-        double cem = alisqiymeti * miqdari;
-
-        String formattedresult = dformater.format(cem);
-        txtUmumi.setText(formattedresult);
-
+       deyisiklik();
     }
 
     private void txtQiymetActionPerformed(java.awt.event.ActionEvent evt) {
@@ -3996,7 +3900,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JCheckBox cbUsaq;
     private javax.swing.JCheckBox cbYay;
     private javax.swing.JCheckBox cbYaz;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLMalinQiymeti;
     private javax.swing.JLabel jLabel1;
