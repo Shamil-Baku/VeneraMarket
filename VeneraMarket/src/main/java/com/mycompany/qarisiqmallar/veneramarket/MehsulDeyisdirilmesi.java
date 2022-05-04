@@ -45,6 +45,8 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         txtBarodeReader.requestFocus();
         buttonGroup1.add(bugun);
         buttonGroup1.add(dunen);
+        buttonGroup1.add(umumi);
+        umumi.doClick();
         txtSatisTarixi.setText(date2);
 
     }
@@ -110,10 +112,13 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         txtMehsulID = new javax.swing.JTextField();
         txtSatisID = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        umumi = new javax.swing.JRadioButton();
         txtCemGeriQaytarilanMehsullar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btnSil = new javax.swing.JButton();
+        btnGeriQaytar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1311, 789));
@@ -157,6 +162,15 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
             tableQaytarilanMallar.getColumnModel().getColumn(0).setMaxWidth(70);
             tableQaytarilanMallar.getColumnModel().getColumn(1).setPreferredWidth(250);
             tableQaytarilanMallar.getColumnModel().getColumn(1).setMaxWidth(400);
+            tableQaytarilanMallar.getColumnModel().getColumn(4).setMinWidth(3);
+            tableQaytarilanMallar.getColumnModel().getColumn(4).setPreferredWidth(2);
+            tableQaytarilanMallar.getColumnModel().getColumn(4).setMaxWidth(150);
+            tableQaytarilanMallar.getColumnModel().getColumn(5).setMinWidth(3);
+            tableQaytarilanMallar.getColumnModel().getColumn(5).setPreferredWidth(2);
+            tableQaytarilanMallar.getColumnModel().getColumn(5).setMaxWidth(150);
+            tableQaytarilanMallar.getColumnModel().getColumn(6).setMinWidth(3);
+            tableQaytarilanMallar.getColumnModel().getColumn(6).setPreferredWidth(2);
+            tableQaytarilanMallar.getColumnModel().getColumn(6).setMaxWidth(150);
         }
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -464,7 +478,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Sil");
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\Delete-icon.png")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -541,41 +555,61 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 0, 0));
         jLabel15.setText("Satış İD");
 
+        umumi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        umumi.setForeground(new java.awt.Color(255, 0, 0));
+        umumi.setText("Ümumi");
+        umumi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                umumiMouseClicked(evt);
+            }
+        });
+        umumi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                umumiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(umumi, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bugun, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dunen, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(secilenTarix, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(secilenTarix, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtMehsulID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSatisID, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSatisID, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(secilenTarix, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(bugun, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dunen, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtSatisID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtMehsulID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtMehsulID)
+                    .addComponent(txtSatisID, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(secilenTarix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bugun, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dunen, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(umumi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -607,10 +641,29 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(255, 0, 0));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Bagla");
+        jButton5.setText("X");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
+            }
+        });
+
+        btnSil.setBackground(new java.awt.Color(255, 51, 0));
+        btnSil.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnSil.setForeground(new java.awt.Color(255, 255, 255));
+        btnSil.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\Delete-icon.png")); // NOI18N
+        btnSil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSilActionPerformed(evt);
+            }
+        });
+
+        btnGeriQaytar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnGeriQaytar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGeriQaytar.setText("Geri Qaytar");
+        btnGeriQaytar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGeriQaytarActionPerformed(evt);
             }
         });
 
@@ -622,7 +675,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(btnSil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -634,31 +687,34 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBarcodeReader, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(yeniAlinanCem, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtBarcodeReader, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton5))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel2)
+                                .addComponent(jButton2))
+                            .addComponent(btnGeriQaytar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -669,7 +725,9 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                         .addComponent(txtBarodeReader, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtBarcodeReader))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBarcodeReader)
+                        .addComponent(jButton5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -678,8 +736,10 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnGeriQaytar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -691,13 +751,12 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(yeniAlinanCem, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnSil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtCemGeriQaytarilanMehsullar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(38, 38, 38))
         );
 
@@ -1029,32 +1088,143 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
 
     }
 
+    public void umumiSatilanMehsulByID() {
+
+        boolean yoxla = txtSatisID.getText().isEmpty();
+        int a;
+        if (yoxla != false) {
+
+            String mehsulID = txtMehsulID.getText();
+
+            try {
+
+                pres = con.prepareCall("SELECT\n"
+                        + "                    s.id,\n"
+                        + "                    s.Satis_ID,                 \n"
+                        + "                    s.Malin_adi,\n"
+                        + "                    s.Miqdari,\n"
+                        + "                    s.Movsum_id,\n"
+                        + "                    s.Kateqoriya_id,\n"
+                        + "                    s.Alt_kateqoriya_id,\n"
+                        + "                    s.Umumi_Mebleg AS Satis_Meblegi_Cem,\n"
+                        + "                    m.Satis_miqdari,\n"
+                        + "                    m.Alis_qiymeti,\n"
+                        + "                    m.Satisin_toplam_deyeri,\n"
+                        + "                    s.Satis_qiymeti,\n"
+                        + "                    m.Satis_miqdari AS Umumi_Satis_Miqdari,\n"
+                        + "                    s.Satis_Tarixi,\n"
+                        + "                    ( s.Miqdari * s.Satis_qiymeti - s.Miqdari * m.Alis_qiymeti ) AS Xeyir, (m.Satisin_toplam_deyeri - m.Alis_qiymeti* m.Satis_miqdari) as Umumi_Xeyir    \n"
+                        + "                    FROM\n"
+                        + "                    satilan_mallar s\n"
+                        + "                    LEFT JOIN mehsullar m ON m.id = s.id\n"
+                        + "                    WHERE s.id = " + "'" + mehsulID + "'");
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+
+        } else {
+
+            String mehsulID = txtMehsulID.getText();
+            int satisID = Integer.parseInt(txtSatisID.getText());
+
+            try {
+
+                pres = con.prepareCall("SELECT\n"
+                        + "       s.id,\n"
+                        + "       s.Satis_ID, \n"
+                        + "       s.Malin_adi,\n"
+                        + "       s.Miqdari,\n"
+                        + "       s.Movsum_id,\n"
+                        + "       s.Kateqoriya_id,\n"
+                        + "       s.Alt_kateqoriya_id,\n"
+                        + "       s.Umumi_Mebleg AS Satis_Meblegi_Cem,\n"
+                        + "       m.Satis_miqdari,\n"
+                        + "       m.Alis_qiymeti,\n"
+                        + "       m.Satisin_toplam_deyeri,\n"
+                        + "       s.Satis_qiymeti,\n"
+                        + "       m.Satis_miqdari AS Umumi_Satis_Miqdari,\n"
+                        + "       s.Satis_Tarixi,\n"
+                        + "       ( s.Miqdari * s.Satis_qiymeti - s.Miqdari * m.Alis_qiymeti ) AS Xeyir, (m.Satisin_toplam_deyeri - m.Alis_qiymeti* m.Satis_miqdari) as Umumi_Xeyir\n"
+                        + "       FROM\n"
+                        + "        satilan_mallar s\n"
+                        + "                  LEFT JOIN mehsullar m ON m.id = s.id\n"
+                        + "                  where s.id = " + "'" + mehsulID + "'" + " and s.Satis_ID = " + "'" + satisID + "'");
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+
+            }
+
+        }
+
+        try {
+
+            ResultSet rs = pres.executeQuery();
+
+            ResultSetMetaData rd = rs.getMetaData();
+            a = rd.getColumnCount();
+            df = (DefaultTableModel) tableQaytarilanMallar.getModel();
+            df.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i < a; i++) {
+                    v2.add(rs.getInt("id"));
+                    v2.add(rs.getString("Malin_adi"));
+                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Satis_qiymeti"));
+                    v2.add(rs.getString("Movsum_id"));
+                    v2.add(rs.getString("Kateqoriya_id"));
+                    v2.add(rs.getString("Alt_kateqoriya_id"));
+                    v2.add(rs.getDouble("Satis_Meblegi_Cem"));
+                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getInt("Satis_ID"));
+
+                }
+                df.addRow(v2);
+
+            }
+
+        } catch (Exception ex) {
+
+            System.out.println(ex);
+        }
+
+    }
+
+    
     public void tetbiqEt() {
 
-        boolean bugun1 = bugun.isSelected();
+       boolean bugun1 = bugun.isSelected();
         boolean dunen2 = dunen.isSelected();
-       
-        
+        boolean umumi2 = umumi.isSelected();
+
+        if (umumi2 != false) {
+
+            umumiSatilanMehsulByID();
+
+        }
 
         if (bugun1 != false) {
 
             bugunSatilanMehsulByID();
-
+            
         }
         if (dunen2 != false) {
 
             dunenSatilanMehsulByID();
 
-        }
-        else {
-            
-        Date tarix = secilenTarix.getDate();
-        String sss = sdf.format(secilenTarix.getDate());
+        } else {
+
+//            Date tarix = secilenTarix.getDate();
+//            String sss = sdf.format(secilenTarix.getDate());
 
             tarixeGoreSatilanMehsulByID();
 
         }
-        
+
         
         
 
@@ -1072,7 +1242,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
 
     private void txtBarcodeReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBarcodeReaderActionPerformed
 
-        String barcode = txtBarcodeReader.getText();
+      String barcode = txtBarcodeReader.getText();
 
         Mehsullar mm2 = mehDao.getMehsulByBarcode(barcode);
 
@@ -1166,15 +1336,14 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
     }
 
     public void geriQaytarma() {
-
-        try {
+     try {
             connect();
 
             double id = Double.parseDouble(txtID.getText());
             int miqdari = Integer.parseInt(TextMalinMiqdari.getText());
             double umumiMebleg = Double.parseDouble(txtUmumi.getText());
 
-            String query2 = "update mehsullar set Satis_miqdari = Satis_miqdari - ?,  Satisin_toplam_deyeri = Satisin_toplam_deyeri - ?, Qaliq_say = Miqdari - Satis_miqdari where id = ?";
+            String query2 = "update mehsullar set Satis_miqdari = Satis_miqdari - ?,  Satisin_toplam_deyeri = Satisin_toplam_deyeri - ?, Qaliq_say = Qaliq_say + Satis_miqdari where id = ?";
 
             pres = con.prepareStatement(query2);
 
@@ -1184,7 +1353,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
             pres.executeUpdate();
 
         } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
     }
@@ -1193,6 +1362,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         df = (DefaultTableModel) tableQaytarilanMallar.getModel();
+        int selected = tableQaytarilanMallar.getSelectedRow();
         if (df.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Səbət boşdur!");
         } else {
@@ -1208,16 +1378,16 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
 
             for (int i = 0; i < df.getRowCount(); i++) {
 
-                ID = df.getValueAt(i, 0).toString();
-                Malin_adi = df.getValueAt(i, 1).toString();
-                Miqdari = df.getValueAt(i, 2).toString();
-                Qiymeti = df.getValueAt(i, 3).toString();
-                Movsum_ID = df.getValueAt(i, 4).toString();
-                Kateqoriya_ID = df.getValueAt(i, 5).toString();
-                Alt_Kateqoriya_ID = df.getValueAt(i, 6).toString();
-                Ümumi_Məbləğ = df.getValueAt(i, 7).toString();
-                Tarix = df.getValueAt(i, 8).toString();
-                SATISID = df.getValueAt(i, 9).toString();
+                ID = df.getValueAt(selected, 0).toString();
+                Malin_adi = df.getValueAt(selected, 1).toString();
+                Miqdari = df.getValueAt(selected, 2).toString();
+                Qiymeti = df.getValueAt(selected, 3).toString();
+                Movsum_ID = df.getValueAt(selected, 4).toString();
+                Kateqoriya_ID = df.getValueAt(selected, 5).toString();
+                Alt_Kateqoriya_ID = df.getValueAt(selected, 6).toString();
+                Ümumi_Məbləğ = df.getValueAt(selected, 7).toString();
+                Tarix = df.getValueAt(selected, 8).toString();
+                SATISID = df.getValueAt(selected, 9).toString();
 
                 String query = "insert into geri_qaytarilan_mehsullar ( id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Satis_Tarixi, Satis_ID ) values(?,?,?,?,?,?,?,?,?,?)";
 
@@ -1236,7 +1406,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     pres.setString(10, SATISID);
                     pres.execute();
 
-                    geriQaytarilanMehsullar();
+                    //geriQaytarilanMehsullar();
                     load_geriQaytarilanlarSiyahisi();
                     Qaytarilanlarin_inHesablanmasi();
 
@@ -1315,6 +1485,53 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void umumiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_umumiMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_umumiMouseClicked
+
+    private void umumiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_umumiActionPerformed
+       
+         umumiSatilanMehsullar();
+    }//GEN-LAST:event_umumiActionPerformed
+
+    private void btnSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilActionPerformed
+        
+        geriQaytarilanMehsullarinSilinmesi();
+        geriQaytarilanlarinHesablanmasi();
+    }//GEN-LAST:event_btnSilActionPerformed
+
+    private void btnGeriQaytarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeriQaytarActionPerformed
+       String id, Malin_adi, Miqdari, Qiymeti, Movsum_ID, Kateqoriya_ID, Alt_Kateqoriya_ID, Ümumi_Məbləğ, tarix, satisID;
+         try {
+             
+             
+              df = (DefaultTableModel) tableQaytarilanMallar.getModel();
+              int selected = tableQaytarilanMallar.getSelectedRow();
+
+       
+                id = df.getValueAt(selected, 0).toString();
+                tarix = df.getValueAt(selected, 8).toString();
+                satisID = df.getValueAt(selected, 9).toString();
+                
+
+            
+
+            pres = con.prepareStatement("delete from satilan_mallar s where s.id =? and s.Satis_Tarixi = ? and s.Satis_ID = ?");
+            pres.setString(1, id);
+            pres.setString(2, tarix);
+            pres.setString(3, satisID);
+            pres.executeUpdate();
+
+            geriQaytarma();
+
+            JOptionPane.showMessageDialog(this, "Mehsul ugurla silindi!");
+
+        } catch (SQLException ex) {
+            System.out.println("Gosterilen mehsul satilan mallar siyahisinda yoxdur!");
+        }
+
+    }//GEN-LAST:event_btnGeriQaytarActionPerformed
+
     public void connect() throws Exception {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -1322,6 +1539,142 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         con = DriverManager.getConnection("jdbc:mysql://localhost/mehsullar", "root", "dxdiag92");
 
     }
+    
+    public void geriQaytarilanlarinHesablanmasi() {
+
+        DecimalFormat dformater = new DecimalFormat("#.##");
+
+        int a;
+        try {
+            pres = con.prepareCall("select * from geri_qaytarilan_mehsullar");
+
+            ResultSet rs = pres.executeQuery();
+
+            ResultSetMetaData rd = rs.getMetaData();
+            a = rd.getColumnCount();
+            df = (DefaultTableModel) SecilmisMallar.getModel();
+            df.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i < a; i++) {
+                    v2.add(rs.getInt("id"));
+                    v2.add(rs.getString("Malin_adi"));
+                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Satis_qiymeti"));
+                    Double s = rs.getDouble("Umumi_Mebleg");
+                    v2.add(s);
+                    v2.add(rs.getString("Satis_Tarixi"));
+
+                }
+                df.addRow(v2);
+
+            }
+
+            df = (DefaultTableModel) SecilmisMallar.getModel();
+
+            double toplam, cem = 0;
+
+            for (int i = 0; i < df.getRowCount(); i++) {
+
+                toplam = Double.parseDouble(df.getValueAt(i, 4).toString());
+                cem += toplam;
+                String formattedGelir = dformater.format(cem);
+                txtCemGeriQaytarilanMehsullar.setText(formattedGelir);
+
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(Satici_Elave_Etmek.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    public void geriQaytarilanMehsullarinSilinmesi() {
+
+        df = (DefaultTableModel) SecilmisMallar.getModel();
+
+        int selected = SecilmisMallar.getSelectedRow();
+
+        int Satis_ID = Integer.parseInt(df.getValueAt(selected, 5).toString());
+
+        try {
+            pres = con.prepareStatement("delete from geri_qaytarilan_mehsullar where Satis_ID = ? ");
+
+            pres.setInt(1, Satis_ID);
+            pres.executeUpdate();
+            loadGeriQaytarilanMallar();
+
+            df = (DefaultTableModel) SecilmisMallar.getModel();
+            if (df.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Səbət boşdur!");
+                txtCemGeriQaytarilanMehsullar.setText("");
+            } else {
+
+                geriQaytarilanlarinHesablanmasi();
+
+            }
+
+            if (df.getRowCount() != 0) {
+
+                JOptionPane.showMessageDialog(this, "Mehsul silindi");
+            } else {
+
+                TextMalinAdi.setText("");
+                TextMalinMiqdari.setText("");
+                txtQiymet.setText("");
+                txtMovsumId.setText("");
+                textKateqoriyaId.setText("");
+                txtAltKateqoriyaID.setText("");
+
+                txtID.setText("");
+                txtUmumi.setText("");
+
+                txtBarodeReader.requestFocus();
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Satici_Elave_Etmek.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    
+    public void loadGeriQaytarilanMallar() {
+
+        int a;
+        try {
+            pres = con.prepareCall("select * from geri_qaytarilan_mehsullar");
+
+            ResultSet rs = pres.executeQuery();
+
+            ResultSetMetaData rd = rs.getMetaData();
+            a = rd.getColumnCount();
+            df = (DefaultTableModel) SecilmisMallar.getModel();
+            df.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i < a; i++) {
+                    v2.add(rs.getInt("id"));
+                    v2.add(rs.getString("Malin_adi"));
+                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Satis_qiymeti"));
+                    Double s = rs.getDouble("Umumi_Mebleg");
+                    v2.add(s);
+                    v2.add(rs.getString("Satis_Tarixi"));
+
+                }
+                df.addRow(v2);
+
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(Satici_Elave_Etmek.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
     public String dunenkiTarix() {
 
@@ -1335,6 +1688,65 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
 
     }
 
+    public void umumiSatilanMehsullar() {
+
+        int a;
+        try {
+
+            pres = con.prepareCall("SELECT\n"
+                    + "	s.id,\n"
+                    + "	s.Satis_ID,\n"
+                    + "	s.Malin_adi,\n"
+                    + "	s.Miqdari,\n"
+                    + "	s.Movsum_id,\n"
+                    + "	s.Kateqoriya_id,\n"
+                    + "	s.Alt_kateqoriya_id,\n"
+                    + "	s.Umumi_Mebleg AS Satis_Meblegi_Cem,\n"
+                    + " m.Satis_miqdari, \n"
+                    + "	m.Alis_qiymeti,\n"
+                    + " m.Satisin_toplam_deyeri, \n"
+                    + "	s.Satis_qiymeti,\n"
+                    + "	m.Satis_miqdari AS Umumi_Satis_Miqdari,\n"
+                    + "	s.Satis_Tarixi,\n"
+                    + "	( s.Miqdari * s.Satis_qiymeti - s.Miqdari * m.Alis_qiymeti ) AS Xeyir, (m.Satisin_toplam_deyeri - m.Alis_qiymeti* m.Satis_miqdari) as Umumi_Xeyir \n"
+                    + "FROM\n"
+                    + "	satilan_mallar s\n"
+                    + "	LEFT JOIN mehsullar m ON m.id = s.id");
+
+            ResultSet rs = pres.executeQuery();
+
+            ResultSetMetaData rd = rs.getMetaData();
+            a = rd.getColumnCount();
+            df = (DefaultTableModel) tableQaytarilanMallar.getModel();
+            df.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i < a; i++) {
+                    v2.add(rs.getInt("id"));
+                    v2.add(rs.getString("Malin_adi"));
+                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Satis_qiymeti"));
+                    v2.add(rs.getString("Movsum_id"));
+                    v2.add(rs.getString("Kateqoriya_id"));
+                    v2.add(rs.getString("Alt_kateqoriya_id"));
+                    v2.add(rs.getDouble("Satis_Meblegi_Cem"));
+                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getInt("Satis_ID"));
+
+                }
+                df.addRow(v2);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        }
+
+    }
+
+    
     public void dunenSatilanMehsullar() {
 
         // txtKassa.removeAll();
@@ -2375,6 +2787,8 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
     private javax.swing.JTable SecilmisMallar;
     private javax.swing.JTextField TextMalinAdi;
     private javax.swing.JTextField TextMalinMiqdari;
+    private javax.swing.JButton btnGeriQaytar;
+    private javax.swing.JButton btnSil;
     private javax.swing.JRadioButton bugun;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cbNagd;
@@ -2421,6 +2835,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
     private javax.swing.JTextField txtSatisID;
     private javax.swing.JTextField txtSatisTarixi;
     private javax.swing.JTextField txtUmumi;
+    private javax.swing.JRadioButton umumi;
     private javax.swing.JTextField yeniAlinanCem;
     // End of variables declaration//GEN-END:variables
 }
