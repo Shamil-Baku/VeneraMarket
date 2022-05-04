@@ -171,7 +171,8 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         btnSatildi = new javax.swing.JButton();
         txtGizlin = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
-        btnElaveEt1 = new javax.swing.JButton();
+        btnGeriQaytar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         cbMehsullar = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -992,13 +993,25 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        btnElaveEt1.setBackground(new java.awt.Color(51, 51, 255));
-        btnElaveEt1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnElaveEt1.setForeground(new java.awt.Color(255, 255, 255));
-        btnElaveEt1.setText("Geri Qaytar");
-        btnElaveEt1.addActionListener(new java.awt.event.ActionListener() {
+        btnGeriQaytar.setBackground(new java.awt.Color(51, 51, 255));
+        btnGeriQaytar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnGeriQaytar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGeriQaytar.setText("Geri Qaytar");
+        btnGeriQaytar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGeriQaytarMouseClicked(evt);
+            }
+        });
+        btnGeriQaytar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElaveEt1ActionPerformed(evt);
+                btnGeriQaytarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Start");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -1009,17 +1022,12 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnElaveEt)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnElaveEt1)
+                                .addComponent(btnGeriQaytar)
                                 .addGap(58, 58, 58)
                                 .addComponent(btnSatildi, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1035,7 +1043,14 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                                 .addGap(85, 85, 85)
                                 .addComponent(txtGizlin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(txtCemMebleg, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCemMebleg, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(280, 280, 280))
         );
         jPanel4Layout.setVerticalGroup(
@@ -1054,10 +1069,12 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSatildi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnElaveEt1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGeriQaytar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnElaveEt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGizlin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGizlin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)))
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -1202,6 +1219,60 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     }//GEN-LAST:event_SilActionPerformed
 
+    private void btnGeriQaytarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGeriQaytarMouseClicked
+        try {
+
+            String tarix = txtSatisTarixi.getText();
+            double id = Double.parseDouble(txtID.getText());
+
+            pres = con.prepareStatement("delete from satilan_mallar s where s.id =? and s.Satis_Tarixi = ?");
+            pres.setDouble(1, id);
+            pres.setString(2, tarix);
+            pres.executeUpdate();
+
+            geriQaytarma();
+
+            JOptionPane.showMessageDialog(this, "Mehsul ugurla silindi!");
+
+        } catch (SQLException ex) {
+            System.out.println("Gosterilen mehsul satilan mallar siyahisinda yoxdur!");
+        }
+
+    }//GEN-LAST:event_btnGeriQaytarMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        int say = 1;
+        try {
+
+            Statement stmt = con.createStatement();
+            stmt.execute("select * from satilan_mallar");
+            ResultSet rs = stmt.getResultSet();
+
+            while (rs.next()) {
+
+                int number = rs.getInt("Satis_ID");
+                int id = rs.getInt("id");
+
+                if (number != 0 && say < 1995) {
+
+                    Statement stmt2 = con.createStatement();
+                    stmt2.execute("update satilan_mallar s set Satis_ID = " + say + " where Satis_ID = ");
+                    ResultSet rss = stmt.getResultSet();
+                    say++;
+                } else {
+                    System.out.println("Say bitmisdir");
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void delete() {
 
         btnSatildi.setVisible(false);
@@ -1277,7 +1348,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     public void exploreAboutProduct() {
 
-     try {
+        try {
             df = (DefaultTableModel) tblAlinanMallar.getModel();
             int selected = tblAlinanMallar.getSelectedRow();
 
@@ -1287,9 +1358,9 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             Mehsullar mehsul = mehDao.getMehsulById(id);
             Mehsullar qaliq = mehDao.exploreMehsulQaliqById(id);
             Integer satisMiq = mehsul.getNumberOfProduct();
-            
+
             Integer qaliqsay = qaliq.getHowMuchLeft();
-            System.out.println("budu---> "+qaliqsay);
+            System.out.println("budu---> " + qaliqsay);
             pres = con.prepareStatement("truncate table detallar;");
             pres.executeUpdate();
 
@@ -1304,10 +1375,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             ex.setVisible(true);
 
             //int satisMiq2 = mehDao.exploreMehsulById(id);
-
             //int say = explore.size();
-
-            
             txtAxtaris.setText(Integer.toString(say));
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -1352,6 +1420,13 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                         borcSiyahisi.setVisible(true);
 
                     } else {
+                        int say=1;
+                        Statement stmt = con.createStatement();
+                        stmt.execute("select * from satilan_mallar");
+                        ResultSet rs = stmt.getResultSet();
+                        while (rs.next()) {                            
+                         say++;   
+                        }
 
                         for (int i = 0; i < df.getRowCount(); i++) {
 
@@ -1366,18 +1441,21 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                             Ümumi_Məbləğ = df.getValueAt(i, 8).toString();
                             Tarix = df.getValueAt(i, 9).toString();
 
-                            String query = "insert into satilan_mallar( id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Satis_Tarixi ) values(?,?,?,?,?,?,?,?,?)";
+                            String query = "insert into satilan_mallar( Satis_ID, id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Satis_Tarixi ) values(?,?,?,?,?,?,?,?,?,?)";
 
                             pres = con.prepareStatement(query);
-                            pres.setString(1, ID);
-                            pres.setString(2, Malin_adi);
-                            pres.setString(3, Miqdari);
-                            pres.setString(4, Qiymeti);
-                            pres.setString(5, Movsum_ID);
-                            pres.setString(6, Kateqoriya_ID);
-                            pres.setString(7, Alt_Kateqoriya_ID);
-                            pres.setString(8, Ümumi_Məbləğ);
-                            pres.setString(9, Tarix);
+                            
+                            
+                            pres.setInt(1, say);
+                            pres.setString(2, ID);
+                            pres.setString(3, Malin_adi);
+                            pres.setString(4, Miqdari);
+                            pres.setString(5, Qiymeti);
+                            pres.setString(6, Movsum_ID);
+                            pres.setString(7, Kateqoriya_ID);
+                            pres.setString(8, Alt_Kateqoriya_ID);
+                            pres.setString(9, Ümumi_Məbləğ);
+                            pres.setString(10, Tarix);
                             pres.execute();
                         }
 
@@ -3742,12 +3820,13 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         // TODO add your handling code here:
     }// GEN-LAST:event_txtQaliqActionPerformed
 
-    private void btnElaveEt1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnElaveEt1ActionPerformed
+    private void btnGeriQaytarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnElaveEt1ActionPerformed
 
         try {
 
             String tarix = txtSatisTarixi.getText();
             double id = Double.parseDouble(txtID.getText());
+            double miqdari = Double.parseDouble(txtID.getText());
 
             pres = con.prepareStatement("delete from satilan_mallar s where s.id =? and s.Satis_Tarixi = ?");
             pres.setDouble(1, id);
@@ -3786,7 +3865,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         if (s == 68) {
 
             try {
-                MehsulDeyisdirilmesi1 md = new MehsulDeyisdirilmesi1();
+                MehsulDeyisdirilmesi md = new MehsulDeyisdirilmesi();
                 md.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -3902,7 +3981,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDuzelisEt;
     private javax.swing.JButton btnElaveEt;
-    private javax.swing.JButton btnElaveEt1;
+    private javax.swing.JButton btnGeriQaytar;
     private javax.swing.JButton btnSatildi;
     private javax.swing.JComboBox<AltKateqoriyalar> cbAltKateqoriyalar;
     private javax.swing.JCheckBox cbKisi;
@@ -3917,6 +3996,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JCheckBox cbUsaq;
     private javax.swing.JCheckBox cbYay;
     private javax.swing.JCheckBox cbYaz;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLMalinQiymeti;
     private javax.swing.JLabel jLabel1;
