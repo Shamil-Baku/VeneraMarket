@@ -141,7 +141,7 @@ public class AlisQaimesiMehsullar extends javax.swing.JFrame {
                 int miqdari = rs.getInt("Miqdari");
                 double alisQiymeti = rs.getDouble("Alis_qiymeti");
                 double satisQiymeti = rs.getDouble("Satis_qiymeti");
-                double umumiMebleg = rs.getDouble("Alisin_toplam_deyer");
+                double umumiMebleg = rs.getDouble("Alisin_toplam_deyeri");
                 int movsumID = rs.getInt("Movsum_id");
                 int kateqoriyaID = rs.getInt("Kateqoriya_id");
                 int altKateqoriyaID = rs.getInt("Alt_kateqoriya_id");
