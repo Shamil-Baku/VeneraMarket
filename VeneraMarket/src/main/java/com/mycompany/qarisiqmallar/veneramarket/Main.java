@@ -190,7 +190,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         txtDisplay = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnPercentage = new javax.swing.JButton();
         btnDivision = new javax.swing.JButton();
         btnNum7 = new javax.swing.JButton();
         btnNum8 = new javax.swing.JButton();
@@ -1192,7 +1192,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         jButton2.setBackground(new java.awt.Color(255, 153, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\GitHubProject\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\icons8-clear-symbol-24.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket\\VeneraMarket\\src\\main\\java\\pictures\\icons8-clear-symbol-24.png")); // NOI18N
         jButton2.setMaximumSize(new java.awt.Dimension(80, 22));
         jButton2.setMinimumSize(new java.awt.Dimension(80, 22));
         jButton2.setPreferredSize(new java.awt.Dimension(80, 22));
@@ -1202,13 +1202,18 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 51));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("%");
-        jButton4.setMaximumSize(new java.awt.Dimension(80, 22));
-        jButton4.setMinimumSize(new java.awt.Dimension(80, 22));
-        jButton4.setPreferredSize(new java.awt.Dimension(80, 22));
+        btnPercentage.setBackground(new java.awt.Color(255, 153, 51));
+        btnPercentage.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnPercentage.setForeground(new java.awt.Color(255, 255, 255));
+        btnPercentage.setText("%");
+        btnPercentage.setMaximumSize(new java.awt.Dimension(80, 22));
+        btnPercentage.setMinimumSize(new java.awt.Dimension(80, 22));
+        btnPercentage.setPreferredSize(new java.awt.Dimension(80, 22));
+        btnPercentage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPercentageActionPerformed(evt);
+            }
+        });
 
         btnDivision.setBackground(new java.awt.Color(255, 153, 51));
         btnDivision.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1362,7 +1367,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         });
 
         jButton18.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jButton18.setIcon(new javax.swing.ImageIcon("C:\\GitHubProject\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\icons8-plus-slash-minus-50.png")); // NOI18N
+        jButton18.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket\\VeneraMarket\\src\\main\\java\\pictures\\icons8-plus-slash-minus-50.png")); // NOI18N
         jButton18.setMaximumSize(new java.awt.Dimension(80, 22));
         jButton18.setMinimumSize(new java.awt.Dimension(80, 22));
         jButton18.setPreferredSize(new java.awt.Dimension(80, 22));
@@ -1409,9 +1414,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(txtDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1431,21 +1434,19 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                             .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNum3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNum6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNum9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnMultiplication, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnMinus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(24, 24, 24))))
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMultiplication, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMinus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1454,7 +1455,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1793,6 +1794,14 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnPercentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPercentageActionPerformed
+    
+        double reqem = Double.parseDouble(txtDisplay.getText());
+        
+        double cem = birinciReqem * reqem / 100 + birinciReqem;
+            txtDisplay.setText(Double.toString(cem));
+    }//GEN-LAST:event_btnPercentageActionPerformed
 
     public void delete() {
 
@@ -4458,6 +4467,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JButton btnNum7;
     private javax.swing.JButton btnNum8;
     private javax.swing.JButton btnNum9;
+    private javax.swing.JButton btnPercentage;
     private javax.swing.JButton btnPlus;
     private javax.swing.JButton btnSatildi;
     private javax.swing.JComboBox<AltKateqoriyalar> cbAltKateqoriyalar;
@@ -4478,7 +4488,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLMalinQiymeti;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
