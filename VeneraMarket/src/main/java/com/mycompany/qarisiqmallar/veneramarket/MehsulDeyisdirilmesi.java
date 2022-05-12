@@ -1882,7 +1882,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
