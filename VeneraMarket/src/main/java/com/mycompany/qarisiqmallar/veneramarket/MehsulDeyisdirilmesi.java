@@ -928,7 +928,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
@@ -1215,7 +1215,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
@@ -1715,7 +1715,8 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getDouble("Satis_qiymeti"));
                     Double s = rs.getDouble("Umumi_Mebleg");
                     v2.add(s);
-                    v2.add(rs.getString("Satis_Tarixi"));
+                    v2.add(rs.getInt("Satis_ID"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
 
                 }
                 df.addRow(v2);
@@ -1728,7 +1729,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
 
             for (int i = 0; i < df.getRowCount(); i++) {
 
-                toplam = Double.parseDouble(df.getValueAt(i, 4).toString());
+                toplam = Double.parseDouble(df.getValueAt(i, 5).toString());
                 cem += toplam;
                 String formattedGelir = dformater.format(cem);
                 txtCemGeriQaytarilanMehsullar.setText(formattedGelir);
@@ -1814,7 +1815,9 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getDouble("Satis_qiymeti"));
                     Double s = rs.getDouble("Umumi_Mebleg");
                     v2.add(s);
-                    v2.add(rs.getString("Satis_Tarixi"));
+                    
+                    v2.add(rs.getString("Satis_ID"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
 
                 }
                 df.addRow(v2);
@@ -1952,7 +1955,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
@@ -2060,7 +2063,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
@@ -2174,7 +2177,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
@@ -2279,7 +2282,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
@@ -2338,7 +2341,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Kateqoriya_id"));
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
-                    v2.add(rs.getDate("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
                     v2.add(rs.getInt("Satis_ID"));
 
                 }
@@ -2376,7 +2379,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getDouble("Satis_qiymeti"));
                     v2.add(rs.getDouble("Umumi_Mebleg"));
                     v2.add(rs.getInt("Satis_ID"));
-                    v2.add(rs.getString("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
 
                 }
                 df.addRow(v2);
@@ -2417,7 +2420,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     Double s = rs.getDouble("Umumi_Mebleg");
                     v2.add(s);
-                    Date ss = rs.getDate("Tarix");
+                    Date ss = rs.getTimestamp("Tarix");
                     v2.add(s);
                     v2.add(rs.getDouble("Qaliq_borc"));
 
@@ -2472,7 +2475,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     Double s = rs.getDouble("Umumi_Mebleg");
                     v2.add(s);
-                    v2.add(rs.getString("Tarix"));
+                    v2.add(rs.getTimestamp("Tarix"));
 
                 }
                 df.addRow(v2);
@@ -2521,7 +2524,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getDouble("Satis_qiymeti"));
                     v2.add(rs.getDouble("Umumi_Mebleg"));
                     v2.add(rs.getInt("Satis_ID"));
-                    v2.add(rs.getString("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
 
                 }
                 df.addRow(v2);
@@ -2571,7 +2574,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getString("Alt_kateqoriya_id"));
                     Double s = rs.getDouble("Umumi_Mebleg");
                     v2.add(s);
-                    v2.add(rs.getString("Tarix"));
+                    v2.add(rs.getTimestamp("Tarix"));
 
                 }
                 df.addRow(v2);
@@ -2605,7 +2608,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                     v2.add(rs.getDouble("Satis_qiymeti"));
                     v2.add(rs.getDouble("Umumi_Mebleg"));
                     v2.add(rs.getInt("Satis_ID"));
-                    v2.add(rs.getString("Satis_Tarixi"));
+                    v2.add(rs.getTimestamp("Satis_Tarixi"));
 
                 }
                 df.addRow(v2);
@@ -2835,7 +2838,7 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
                 v2.add(rs.getString("Alt_kateqoriya_id"));
                 v2.add(rs.getDouble("Umumi_Mebleg"));
 
-                Date s = rs.getDate("Tarix");
+                Date s = rs.getTimestamp("Tarix");
                 v2.add(s);
                 v2.add(rs.getDouble("Qaliq_borc"));
             }
