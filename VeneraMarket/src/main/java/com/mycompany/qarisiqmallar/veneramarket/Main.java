@@ -5,35 +5,19 @@
  */
 package com.mycompany.qarisiqmallar.veneramarket;
 
-//import com.google.zxing.BinaryBitmap;
-//import com.google.zxing.LuminanceSource;
-//import com.google.zxing.MultiFormatReader;
-//import com.google.zxing.Reader;
-//import com.google.zxing.Result;
-//import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-//import com.google.zxing.common.HybridBinarizer;
-//import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.protobuf.ByteString;
 import com.mycompany.DaoInter.AltKateqoriyalarDaoInter;
 import com.mycompany.DaoInter.MehsullarDaoInter;
 import com.mycompany.DaoInter.QiymetlerDaoInter;
 
-import com.mycompany.entity.AltKateqoriyalar;
 import com.mycompany.entity.Mehsullar;
-import com.mycompany.entity.Qiymetler;
 
 import java.awt.event.KeyEvent;
 import com.mycompany.main.Contex;
-import com.mysql.cj.xdevapi.Result;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.Reader;
 import java.sql.Connection;
 // import java.sql.Date;
 import java.util.Date;
@@ -46,18 +30,16 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -72,15 +54,19 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     Date date = new Date();
     Calendar calendar;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
-    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm:ss");
-    String date2 = sdf.format(date);
-    String date3 = sdf2.format(date);
-    String date4 = sdf3.format(date);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
+    SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm:ss a");
+    SimpleDateFormat sdf4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a");
+    String date3 = sdf.format(date);
 
     int say = 1;
-    String time;
+    
+    // Date
+    String time555;
+    Timer timer;
+    Timer timer2;
+    String currentDate;
 
     // Calculator
     double birinciReqem = 0.0;
@@ -96,27 +82,18 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
+        sdf3 = new SimpleDateFormat("hh:mm:ss a");
 
-        txtSatisTarixi.setText(date2);
-        // txtDate.setText(date3);
+//        time = sdf3.format(Calendar.getInstance().getTime());
+//        lblTime.setText(time);
+
+        txtSatisTarixi.setText(date3);
         txtBarcode_reader.requestFocus();
-        cbMehsullar.setVisible(false);
-        // Image icon = new ImageIcon(this.getClass().getResource("icon
-        // file.jpg")).getImage();
-        // this.setIconImage(icon);
-        // setTime();
+
+        setTime();
     }
 
-    // public Main(Image icon) throws Exception {
-    //
-    // logo = new ImageIcon("C:\\Users\\samil\\OneDrive\\Изображения\\Camera
-    // Roll\\Icon file.jpg");
-    //
-    // Main m = new Main();
-    // m.setIcon(logo);
-    // m.setLayout(null);
-    //
-    // }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -126,21 +103,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         Detallar = new javax.swing.JMenuItem();
         Sil = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        cbYaz = new javax.swing.JCheckBox();
-        cbYay = new javax.swing.JCheckBox();
-        cbPayiz = new javax.swing.JCheckBox();
-        cbQis = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        cbKisi = new javax.swing.JCheckBox();
-        cbUsaq = new javax.swing.JCheckBox();
-        cbQadin = new javax.swing.JCheckBox();
-        cbQarisiq = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
-        cbAltKateqoriyalar = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        cbMehsullar_2 = new javax.swing.JComboBox<>();
         txtOdenis = new javax.swing.JTextField();
         txtAxtaris = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -148,7 +110,8 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         txtQaliq = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        lblTime = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAlinanMallar = new javax.swing.JTable();
@@ -182,15 +145,12 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         btnSatildi = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnGeriQaytar = new javax.swing.JButton();
-        cbMehsullar = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblAxtaris = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         txtDisplay = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        btnPercentage = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         btnDivision = new javax.swing.JButton();
         btnNum7 = new javax.swing.JButton();
         btnNum8 = new javax.swing.JButton();
@@ -208,6 +168,8 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         btnNum0 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         btnEqual = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAxtaris = new javax.swing.JTable();
 
         Detallar.setText("Detallar");
         Detallar.addActionListener(new java.awt.event.ActionListener() {
@@ -227,284 +189,12 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Satış", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
-            }
-        });
-
-        jPanel2.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        cbYaz.setBackground(new java.awt.Color(153, 153, 255));
-        cbYaz.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbYaz.setForeground(java.awt.Color.white);
-        cbYaz.setText("Yaz");
-        cbYaz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbYazActionPerformed(evt);
-            }
-        });
-
-        cbYay.setBackground(new java.awt.Color(153, 153, 255));
-        cbYay.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbYay.setForeground(java.awt.Color.white);
-        cbYay.setText("Yay");
-        cbYay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbYayActionPerformed(evt);
-            }
-        });
-
-        cbPayiz.setBackground(new java.awt.Color(153, 153, 255));
-        cbPayiz.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbPayiz.setForeground(java.awt.Color.white);
-        cbPayiz.setText("Payiz");
-        cbPayiz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPayizActionPerformed(evt);
-            }
-        });
-
-        cbQis.setBackground(new java.awt.Color(153, 153, 255));
-        cbQis.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbQis.setForeground(java.awt.Color.white);
-        cbQis.setText("Qis");
-        cbQis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbQisActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbYaz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbYay, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbPayiz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbQis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbPayiz)
-                    .addComponent(cbYaz))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbQis, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbYay, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
-        );
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(java.awt.Color.white);
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Movsumler");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jPanel3.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        cbKisi.setBackground(new java.awt.Color(153, 153, 255));
-        cbKisi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbKisi.setForeground(java.awt.Color.white);
-        cbKisi.setText("Kisi");
-        cbKisi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbKisiMouseClicked(evt);
-            }
-        });
-        cbKisi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbKisiActionPerformed(evt);
-            }
-        });
-
-        cbUsaq.setBackground(new java.awt.Color(153, 153, 255));
-        cbUsaq.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbUsaq.setForeground(java.awt.Color.white);
-        cbUsaq.setText("Usaq");
-        cbUsaq.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbUsaqMouseClicked(evt);
-            }
-        });
-        cbUsaq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUsaqActionPerformed(evt);
-            }
-        });
-
-        cbQadin.setBackground(new java.awt.Color(153, 153, 255));
-        cbQadin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbQadin.setForeground(java.awt.Color.white);
-        cbQadin.setText("Qadin");
-        cbQadin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbQadinMouseClicked(evt);
-            }
-        });
-        cbQadin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbQadinActionPerformed(evt);
-            }
-        });
-
-        cbQarisiq.setBackground(new java.awt.Color(153, 153, 255));
-        cbQarisiq.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbQarisiq.setForeground(java.awt.Color.white);
-        cbQarisiq.setText("Qarisiq");
-        cbQarisiq.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbQarisiqMouseClicked(evt);
-            }
-        });
-        cbQarisiq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbQarisiqActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(cbKisi, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbQadin))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(cbUsaq, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbQarisiq, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 6, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbQadin)
-                    .addComponent(cbKisi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbUsaq, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbQarisiq))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(java.awt.Color.white);
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Kateqoriyalar");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        cbAltKateqoriyalar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        cbAltKateqoriyalar.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbAltKateqoriyalarItemStateChanged(evt);
-            }
-        });
-        cbAltKateqoriyalar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbAltKateqoriyalarMouseClicked(evt);
-            }
-        });
-        cbAltKateqoriyalar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAltKateqoriyalarActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setForeground(java.awt.Color.white);
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Alt Kateqoriyalar");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        cbMehsullar_2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        cbMehsullar_2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbMehsullar_2ItemStateChanged(evt);
-            }
-        });
-        cbMehsullar_2.addHierarchyListener(new java.awt.event.HierarchyListener() {
-            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
-                cbMehsullar_2HierarchyChanged(evt);
-            }
-        });
-        cbMehsullar_2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cbMehsullar_2MouseMoved(evt);
-            }
-        });
-        cbMehsullar_2.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
-            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
-                cbMehsullar_2AncestorMoved(evt);
-            }
-            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
-            }
-        });
-        cbMehsullar_2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbMehsullar_2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                cbMehsullar_2MouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cbMehsullar_2MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                cbMehsullar_2MouseReleased(evt);
-            }
-        });
-        cbMehsullar_2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
-                cbMehsullar_2ComponentMoved(evt);
-            }
-        });
-        cbMehsullar_2.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                cbMehsullar_2CaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                cbMehsullar_2InputMethodTextChanged(evt);
-            }
-        });
-        cbMehsullar_2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbMehsullar_2ActionPerformed(evt);
-            }
-        });
-        cbMehsullar_2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cbMehsullar_2PropertyChange(evt);
-            }
-        });
-        cbMehsullar_2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cbMehsullar_2KeyPressed(evt);
-            }
-        });
-        cbMehsullar_2.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                cbMehsullar_2VetoableChange(evt);
             }
         });
 
@@ -577,91 +267,73 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Qalıq");
 
+        lblTime.setBackground(new java.awt.Color(255, 51, 51));
+        lblTime.setFont(new java.awt.Font("Segoe UI Emoji", 1, 55)); // NOI18N
+        lblTime.setForeground(new java.awt.Color(255, 255, 255));
+        lblTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTime.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket\\VeneraMarket\\src\\main\\java\\pictures\\icons8-arrow-pointing-left-48.png")); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtAxtaris, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(txtBarcode_reader))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAxtaris, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addComponent(txtOdenis, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtQaliq, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbMehsullar_2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(cbAltKateqoriyalar, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtBarcode_reader, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtOdenis, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtQaliq, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66))))
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtAxtaris, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtBarcode_reader, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtQaliq, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtOdenis, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtOdenis)
-                            .addComponent(txtQaliq))
-                        .addGap(18, 18, 18))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel14)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbAltKateqoriyalar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(cbMehsullar_2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(txtAxtaris, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(21, 21, 21))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBarcode_reader, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(15, Short.MAX_VALUE))))))
         );
-
-        jSeparator1.setBackground(new java.awt.Color(102, 51, 255));
-        jSeparator1.setForeground(new java.awt.Color(255, 0, 0));
-        jSeparator1.setName(""); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 255));
 
@@ -1039,40 +711,18 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        cbMehsullar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbMehsullar.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbMehsullarItemStateChanged(evt);
-            }
-        });
-        cbMehsullar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                cbMehsullarMouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cbMehsullarMousePressed(evt);
-            }
-        });
-        cbMehsullar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbMehsullarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnElaveEt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGeriQaytar)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbMehsullar, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(74, 74, 74)
                         .addComponent(btnSatildi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel)
@@ -1083,21 +733,21 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCemMebleg, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCemMebleg, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1113,52 +763,14 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                                 .addComponent(btnElaveEt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbMehsullar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCemMebleg, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(txtCemMebleg, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 255));
-
-        tblAxtaris.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Malin adi", "Qiymet", "MovsumID", "KateqoriyaID", "AltKateqoriyaID"
-            }
-        ));
-        tblAxtaris.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblAxtarisMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblAxtaris);
-        if (tblAxtaris.getColumnModel().getColumnCount() > 0) {
-            tblAxtaris.getColumnModel().getColumn(0).setMinWidth(10);
-            tblAxtaris.getColumnModel().getColumn(0).setPreferredWidth(40);
-            tblAxtaris.getColumnModel().getColumn(0).setMaxWidth(150);
-            tblAxtaris.getColumnModel().getColumn(1).setMinWidth(10);
-            tblAxtaris.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tblAxtaris.getColumnModel().getColumn(1).setMaxWidth(200);
-            tblAxtaris.getColumnModel().getColumn(2).setMinWidth(2);
-            tblAxtaris.getColumnModel().getColumn(2).setPreferredWidth(3);
-            tblAxtaris.getColumnModel().getColumn(2).setMaxWidth(100);
-            tblAxtaris.getColumnModel().getColumn(3).setMinWidth(2);
-            tblAxtaris.getColumnModel().getColumn(3).setPreferredWidth(3);
-            tblAxtaris.getColumnModel().getColumn(3).setMaxWidth(100);
-            tblAxtaris.getColumnModel().getColumn(4).setMinWidth(2);
-            tblAxtaris.getColumnModel().getColumn(4).setPreferredWidth(3);
-            tblAxtaris.getColumnModel().getColumn(4).setMaxWidth(100);
-            tblAxtaris.getColumnModel().getColumn(5).setMinWidth(2);
-            tblAxtaris.getColumnModel().getColumn(5).setPreferredWidth(3);
-            tblAxtaris.getColumnModel().getColumn(5).setMaxWidth(100);
-        }
 
         jPanel7.setPreferredSize(new java.awt.Dimension(320, 500));
 
@@ -1202,18 +814,13 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        btnPercentage.setBackground(new java.awt.Color(255, 153, 51));
-        btnPercentage.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        btnPercentage.setForeground(new java.awt.Color(255, 255, 255));
-        btnPercentage.setText("%");
-        btnPercentage.setMaximumSize(new java.awt.Dimension(80, 22));
-        btnPercentage.setMinimumSize(new java.awt.Dimension(80, 22));
-        btnPercentage.setPreferredSize(new java.awt.Dimension(80, 22));
-        btnPercentage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPercentageActionPerformed(evt);
-            }
-        });
+        jButton4.setBackground(new java.awt.Color(255, 153, 51));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("%");
+        jButton4.setMaximumSize(new java.awt.Dimension(80, 22));
+        jButton4.setMinimumSize(new java.awt.Dimension(80, 22));
+        jButton4.setPreferredSize(new java.awt.Dimension(80, 22));
 
         btnDivision.setBackground(new java.awt.Color(255, 153, 51));
         btnDivision.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1414,48 +1021,50 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNum0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNum9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNum0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNum9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnMultiplication, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnMinus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnPlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMultiplication, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMinus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(txtDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1482,8 +1091,43 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                     .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNum0, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
+
+        tblAxtaris.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Malin adi", "Qiymet", "MovsumID", "KateqoriyaID", "AltKateqoriyaID"
+            }
+        ));
+        tblAxtaris.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAxtarisMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblAxtaris);
+        if (tblAxtaris.getColumnModel().getColumnCount() > 0) {
+            tblAxtaris.getColumnModel().getColumn(0).setMinWidth(10);
+            tblAxtaris.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblAxtaris.getColumnModel().getColumn(0).setMaxWidth(150);
+            tblAxtaris.getColumnModel().getColumn(1).setMinWidth(10);
+            tblAxtaris.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblAxtaris.getColumnModel().getColumn(1).setMaxWidth(200);
+            tblAxtaris.getColumnModel().getColumn(2).setMinWidth(1);
+            tblAxtaris.getColumnModel().getColumn(2).setPreferredWidth(1);
+            tblAxtaris.getColumnModel().getColumn(2).setMaxWidth(100);
+            tblAxtaris.getColumnModel().getColumn(3).setMinWidth(1);
+            tblAxtaris.getColumnModel().getColumn(3).setPreferredWidth(1);
+            tblAxtaris.getColumnModel().getColumn(3).setMaxWidth(100);
+            tblAxtaris.getColumnModel().getColumn(4).setMinWidth(1);
+            tblAxtaris.getColumnModel().getColumn(4).setPreferredWidth(1);
+            tblAxtaris.getColumnModel().getColumn(4).setMaxWidth(100);
+            tblAxtaris.getColumnModel().getColumn(5).setMinWidth(1);
+            tblAxtaris.getColumnModel().getColumn(5).setPreferredWidth(1);
+            tblAxtaris.getColumnModel().getColumn(5).setMaxWidth(100);
+        }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1491,18 +1135,19 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1510,28 +1155,24 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -1720,7 +1361,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                 break;
             }
 
-
             default:
                 System.out.println("Hec biri");
         }
@@ -1795,13 +1435,19 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnPercentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPercentageActionPerformed
-    
-        double reqem = Double.parseDouble(txtDisplay.getText());
-        
-        double cem = birinciReqem * reqem / 100 + birinciReqem;
-            txtDisplay.setText(Double.toString(cem));
-    }//GEN-LAST:event_btnPercentageActionPerformed
+    public String timeFormatter() {
+
+        int length = lblTime.getText().length();
+
+        String store = null;
+
+        String back = (lblTime.getText());
+        String ss = back.substring(0, 19);
+        ss.length();
+        store = ss;
+
+        return store;
+    }
 
     public void delete() {
 
@@ -1939,7 +1585,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         } else {
             String ID, Malin_adi, Miqdari, Qiymeti, Movsum_ID, Kateqoriya_ID, Alt_Kateqoriya_ID, Ümumi_Məbləğ, Tarix;
             try {
-                connect();
+                // connect();
 
                 try {
                     if (yoxla != false) {
@@ -1967,7 +1613,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                             Kateqoriya_ID = df.getValueAt(i, 6).toString();
                             Alt_Kateqoriya_ID = df.getValueAt(i, 7).toString();
                             Ümumi_Məbləğ = df.getValueAt(i, 8).toString();
-                            Tarix = df.getValueAt(i, 9).toString();
+                            Tarix = time555;
 
                             String query = "insert into satilan_mallar( Satis_ID, id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Satis_Tarixi ) values(?,?,?,?,?,?,?,?,?,?)";
 
@@ -2495,16 +2141,45 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     public void setTime() {
 
-        while (true) {
-            try {
-                time = sdf3.format(Calendar.getInstance().getTime());
-                // txtDate.setText(time);
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        timer = new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                Date dt = new Date();
+                sdf = new SimpleDateFormat("HH:mm:ss");
+                sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                String time = sdf.format(dt);
+                lblTime.setText(time);
+                
+                String time2 = sdf2.format(dt);
+                time555 =time2;
+                
+                
             }
-        }
+        });
+        timer.start();
+
     }
+    
+     public String setTime2() {
+
+        timer2 = new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                Date dt = new Date();
+                sdf4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a");
+
+                currentDate = sdf4.format(dt);
+               
+            }
+        });
+        timer2.start();
+        return currentDate;
+
+    }
+
 
     public void connect() throws Exception {
 
@@ -2514,45 +2189,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     }
 
-    // public void barcodeWriter() {
-    //
-    // try {
-    //
-    // InputStream barInputStream = new
-    // FileInputStream("C:\\Users\\samil\\OneDrive\\Документы\\NetBeansProjects\\VeneraMarket\\Barcodes\\"
-    // + "txtBarcoduYaz.getText()" + ".png");
-    // BufferedImage barImage = ImageIO.read(barInputStream);
-    // LuminanceSource source = new BufferedImageLuminanceSource(barImage);
-    // BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-    // Reader reader = new MultiFormatReader();
-    // Result result = reader.decode(bitmap);
-    // //txtBarcode_reader.setText(result.getText());
-    //
-    // } catch (Exception ex) {
-    //
-    // }
-    //
-    // }
-    //
-    // public void barcodeReader() {
-    //
-    // try {
-    //
-    // InputStream barInputStream = new
-    // FileInputStream("C:\\Users\\samil\\OneDrive\\Документы\\NetBeansProjects\\VeneraMarket\\Barcodes\\"
-    // + txtBarcode_reader.getText() + ".png");
-    // BufferedImage barImage = ImageIO.read(barInputStream);
-    // LuminanceSource source = new BufferedImageLuminanceSource(barImage);
-    // BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-    // Reader reader = new MultiFormatReader();
-    // Result result = reader.decode(bitmap);
-    // TextMalinAdi.setText(result.getText());
-    //
-    // } catch (Exception ex) {
-    //
-    // }
-    //
-    // }
     public void sebetinHesablanmasi() {
 
         DecimalFormat dformater = new DecimalFormat("#.##");
@@ -2667,745 +2303,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         }
     }
 
-    private void findPrice() {
-
-        String s = (String) cbMehsullar_2.getSelectedItem(); // buradan
-
-        TextMalinAdi.setText(s);
-
-        boolean MovsumQis = cbQis.isSelected();
-        boolean SecimQadin = cbQadin.isSelected();
-        boolean SecimKisi = cbKisi.isSelected();
-        boolean SecimUsaq = cbUsaq.isSelected();
-        boolean SecimQarisiq = cbQarisiq.isSelected();
-
-        if (MovsumQis != false) {
-
-            if (SecimQadin != false) {
-
-                int MovsumQis1 = 4;
-                int SecimQadin1 = 2;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-                int NumberOfSubCategory2 = NumberOfSubCategory + 1;
-                String name = TextMalinAdi.getText();
-                String name2 = "'" + name + "'";
-                List<Qiymetler> id1 = QiymetDao.getPriceByCategoryAndSubCategoryAndSeasonIdAndByName(SecimQadin1,
-                        NumberOfSubCategory2, MovsumQis1, name2);
-
-                for (int i = 0; i < id1.size(); i++) {
-
-                    txtMovsumId.removeAll();
-                    textKateqoriyaId.removeAll();
-                    txtAltKateqoriyaID.removeAll();
-                    txtQiymet.removeAll();
-                    TextMalinMiqdari.removeAll();
-                    txtID.removeAll();
-
-                    Qiymetler i2 = id1.get(i);
-
-                    txtMovsumId.setText(i2.getSeasonId());
-                    textKateqoriyaId.setText(i2.getCategoryID());
-                    txtAltKateqoriyaID.setText(i2.getSubCategoryId());
-                    txtQiymet.setText(i2.getQiymet());
-                    txtID.setText(i2.getId());
-                    TextMalinMiqdari.setText("");
-                    txtUmumi.setText("");
-
-                }
-
-            }
-            if (SecimKisi != false) {
-
-                int MovsumQis1 = 4;
-                int SecimKisi1 = 1;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-                int NumberOfSubCategory2 = NumberOfSubCategory + 1;
-
-                String name = TextMalinAdi.getText();
-                String name2 = "'" + name + "'";
-                List<Qiymetler> id1 = QiymetDao.getPriceByCategoryAndSubCategoryAndSeasonIdAndByName(SecimKisi1,
-                        NumberOfSubCategory2, MovsumQis1, name2);
-
-                for (int i = 0; i < id1.size(); i++) {
-
-                    txtMovsumId.removeAll();
-                    textKateqoriyaId.removeAll();
-                    txtAltKateqoriyaID.removeAll();
-                    txtQiymet.removeAll();
-                    TextMalinMiqdari.removeAll();
-                    txtID.removeAll();
-
-                    // // cbMalinQiymeti.addItem(id1.get(i));
-                    Qiymetler i2 = id1.get(i);
-
-                    txtMovsumId.setText(i2.getSeasonId());
-                    textKateqoriyaId.setText(i2.getCategoryID());
-                    txtAltKateqoriyaID.setText(i2.getSubCategoryId());
-                    txtQiymet.setText(i2.getQiymet());
-                    txtID.setText(i2.getId());
-                    TextMalinMiqdari.setText("");
-                    txtUmumi.setText("");
-
-                }
-
-            }
-
-            if (SecimUsaq != false) {
-
-                int MovsumQis1 = 4;
-                int SecimUsaq3 = 3;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-                int NumberOfSubCategory2 = NumberOfSubCategory + 1;
-
-                String name = TextMalinAdi.getText();
-                String name2 = "'" + name + "'";
-                List<Qiymetler> id1 = QiymetDao.getPriceByCategoryAndSubCategoryAndSeasonIdAndByName(SecimUsaq3,
-                        NumberOfSubCategory2, MovsumQis1, name2);
-
-                for (int i = 0; i < id1.size(); i++) {
-
-                    txtMovsumId.removeAll();
-                    textKateqoriyaId.removeAll();
-                    txtAltKateqoriyaID.removeAll();
-                    txtQiymet.removeAll();
-                    TextMalinMiqdari.removeAll();
-                    txtID.removeAll();
-
-                    // // cbMalinQiymeti.addItem(id1.get(i));
-                    Qiymetler i2 = id1.get(i);
-
-                    txtMovsumId.setText(i2.getSeasonId());
-                    textKateqoriyaId.setText(i2.getCategoryID());
-                    txtAltKateqoriyaID.setText(i2.getSubCategoryId());
-                    txtQiymet.setText(i2.getQiymet());
-                    txtID.setText(i2.getId());
-                    TextMalinMiqdari.setText("");
-                    txtUmumi.setText("");
-
-                }
-
-            }
-
-            if (SecimQarisiq != false) {
-
-                int MovsumQis1 = 4;
-                int SecimQarisiq4 = 4;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-                int NumberOfSubCategory2 = NumberOfSubCategory + 1;
-
-                String name = TextMalinAdi.getText();
-                String name2 = "'" + name + "'";
-                List<Qiymetler> id1 = QiymetDao.getPriceByCategoryAndSubCategoryAndSeasonIdAndByName(SecimQarisiq4,
-                        NumberOfSubCategory2, MovsumQis1, name2);
-
-                for (int i = 0; i < id1.size(); i++) {
-
-                    txtMovsumId.removeAll();
-                    textKateqoriyaId.removeAll();
-                    txtAltKateqoriyaID.removeAll();
-                    txtQiymet.removeAll();
-                    TextMalinMiqdari.removeAll();
-                    txtID.removeAll();
-
-                    // // cbMalinQiymeti.addItem(id1.get(i));
-                    Qiymetler i2 = id1.get(i);
-
-                    txtMovsumId.setText(i2.getSeasonId());
-                    textKateqoriyaId.setText(i2.getCategoryID());
-                    txtAltKateqoriyaID.setText(i2.getSubCategoryId());
-                    txtQiymet.setText(i2.getQiymet());
-                    txtID.setText(i2.getId());
-                    TextMalinMiqdari.setText("");
-                    txtUmumi.setText("");
-
-                }
-
-            }
-
-        }
-
-    }
-
-    private void fillWindowForYaz() {
-
-        Boolean secim1 = cbYaz.isSelected();
-        Boolean secim2 = cbYay.isSelected();
-        Boolean secim3 = cbPayiz.isSelected();
-        Boolean secim4 = cbQis.isSelected();
-        // System.out.println(secim1);
-        int countForYaz = 0;
-        int countForYay = 0;
-        if (secim2 != false) { // Secim 2 in yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-                countForYaz++;
-            }
-            countForYaz++;
-            if (secim2 != false) {
-                List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(2);
-                countForYay++;
-                for (int i = 0; i < id2.size(); i++) {
-                    cbMehsullar.addItem(id.get(i));
-                }
-            }
-        }
-
-        // Secim 3 un yoxlanisi buradan baslayir
-        if (secim3 != false) {
-            cbMehsullar.removeAllItems();
-            if (secim3 != false) {
-                List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(3);
-
-                for (int i = 0; i < id2.size(); i++) {
-                    cbMehsullar.addItem(id2.get(i));
-                }
-
-            }
-            List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-                countForYaz++;
-            }
-
-            if (secim2 != false) {
-
-                List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(2);
-                for (int i = 0; i < id2.size(); i++) {
-                    cbMehsullar.addItem(id2.get(i));
-                }
-            }
-
-            if (secim4 != false & countForYay > 0) {
-                List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(4);
-                for (int i = 0; i < id3.size(); i++) {
-                    cbMehsullar.addItem(id3.get(i));
-                }
-
-            }
-
-        }
-
-        if (secim4 != false) { // Secim 4 un yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-            }
-            if (secim2 != false) {
-                List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(2);
-                for (int i = 0; i < id3.size(); i++) {
-                    cbMehsullar.addItem(id3.get(i));
-                }
-
-            }
-            if (secim3 != false) {
-                List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(3);
-                for (int i = 0; i < id3.size(); i++) {
-                    cbMehsullar.addItem(id3.get(i));
-                }
-
-            }
-            if (secim4 != false) {
-                List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(4);
-                for (int i = 0; i < id3.size(); i++) {
-                    cbMehsullar.addItem(id3.get(i));
-                }
-            }
-
-        } else {
-            if (secim1 != false & countForYaz <= 0) {
-                cbMehsullar.removeAllItems();
-                List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(1);
-                for (int i = 0; i < id3.size(); i++) {
-                    cbMehsullar.addItem(id3.get(i));
-                }
-
-            }
-        }
-
-    }
-
-    private void fillWindowForYay() {
-
-        Boolean secim1 = cbYaz.isSelected();
-        Boolean secim2 = cbYay.isSelected();
-        Boolean secim3 = cbPayiz.isSelected();
-        Boolean secim4 = cbQis.isSelected();
-        // System.out.println(secim1);
-        int countForYaz = 0;
-        int countForYay = 0;
-        if (secim1 != false) { // Secim 1 in yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-            }
-            countForYaz++;
-            List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(2);
-            countForYay++;
-            for (int i = 0; i < id2.size(); i++) {
-                cbMehsullar.addItem(id2.get(i));
-            }
-        }
-
-        // Secim 3 un yoxlanisi buradan baslayir
-        if (secim3 != false) {
-            cbMehsullar.removeAllItems();
-            if (secim1 != false) {
-                List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-                for (int i = 0; i < id.size(); i++) {
-                    cbMehsullar.addItem(id.get(i));
-                }
-
-            }
-
-            List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(2);
-            countForYay++;
-            for (int i = 0; i < id2.size(); i++) {
-                cbMehsullar.addItem(id2.get(i));
-            }
-            List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(3);
-            for (int i = 0; i < id3.size(); i++) {
-                cbMehsullar.addItem(id3.get(i));
-            }
-
-        }
-
-        if (secim4 != false) { // Secim 4 un yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            if (secim1 != false) {
-                List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-                for (int i = 0; i < id.size(); i++) {
-                    cbMehsullar.addItem(id.get(i));
-                }
-
-            }
-
-            List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(2);
-
-            for (int i = 0; i < id2.size(); i++) {
-
-                cbMehsullar.addItem(id2.get(i));
-                countForYay++;
-            }
-
-            if (secim3 != false) {
-                List<Mehsullar> id5 = mehDao.getMehsulByMovsumId(3);
-                for (int i = 0; i < id5.size(); i++) {
-                    cbMehsullar.addItem(id5.get(i));
-                }
-            }
-
-            if (secim4 != false) {
-                List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(4);
-                for (int i = 0; i < id3.size(); i++) {
-                    cbMehsullar.addItem(id3.get(i));
-                }
-
-            } else {
-
-                // secim 2 in yoxlanilmasi
-                if (secim2 != false) {
-                    List<Mehsullar> id = mehDao.getMehsulByMovsumId(2);
-                    for (int i = 0; i < id.size(); i++) {
-                        cbMehsullar.addItem(id.get(i));
-                    }
-                    countForYay++;
-                }
-
-            }
-
-        }
-        if (secim2 != false & countForYay <= 0) {
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id6 = mehDao.getMehsulByMovsumId(2);
-            for (int i = 0; i < id6.size(); i++) {
-                cbMehsullar.addItem(id6.get(i));
-            }
-
-        }
-
-    }
-
-    private void fillWindowForPayiz() {
-
-        Boolean secim1 = cbYaz.isSelected();
-        Boolean secim2 = cbYay.isSelected();
-        Boolean secim3 = cbPayiz.isSelected();
-        Boolean secim4 = cbQis.isSelected();
-
-        int countForYaz = 0;
-        int countForYay = 0;
-        int countForPayiz = 0;
-        if (secim1 != false) { // Secim 1 in yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id = mehDao.getMehsulByMovsumId(3);
-            countForPayiz++;
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-
-            }
-
-            List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(1);
-            countForYaz++;
-            for (int i = 0; i < id2.size(); i++) {
-                cbMehsullar.addItem(id2.get(i));
-            }
-        }
-
-        // Secim 2 in yoxlanisi buradan baslayir
-        if (secim2 != false) {
-            cbMehsullar.removeAllItems();
-            if (secim1 != false) {
-                List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-                for (int i = 0; i < id.size(); i++) {
-                    cbMehsullar.addItem(id.get(i));
-                }
-
-            }
-
-            List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(2);
-            countForYay++;
-            for (int i = 0; i < id2.size(); i++) {
-                cbMehsullar.addItem(id2.get(i));
-            }
-            List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(3);
-            for (int i = 0; i < id3.size(); i++) {
-                cbMehsullar.addItem(id3.get(i));
-                countForPayiz++;
-
-            }
-            if (secim4 != false) {
-                List<Mehsullar> id4 = mehDao.getMehsulByMovsumId(4);
-                for (int i = 0; i < id4.size(); i++) {
-                    cbMehsullar.addItem(id4.get(i));
-                }
-
-            }
-        }
-
-        if (secim4 != false) { // Secim 4 un yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            if (secim1 != false) {
-                List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-                for (int i = 0; i < id.size(); i++) {
-                    cbMehsullar.addItem(id.get(i));
-                }
-
-            }
-            if (secim2 != false) {
-                List<Mehsullar> id5 = mehDao.getMehsulByMovsumId(2);
-                for (int i = 0; i < id5.size(); i++) {
-                    cbMehsullar.addItem(id5.get(i));
-                }
-            }
-
-            List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(3);
-            for (int i = 0; i < id3.size(); i++) {
-                cbMehsullar.addItem(id3.get(i));
-                countForPayiz++;
-            }
-
-            if (secim4 != false) {
-                List<Mehsullar> id5 = mehDao.getMehsulByMovsumId(4);
-                for (int i = 0; i < id5.size(); i++) {
-                    cbMehsullar.addItem(id5.get(i));
-
-                }
-
-            }
-
-        } else if (secim3 != false & countForPayiz <= 0) {
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(3);
-            for (int i = 0; i < id3.size(); i++) {
-                cbMehsullar.addItem(id3.get(i));
-            }
-
-        }
-
-    }
-
-    private void fillWindowForQis() {
-        Boolean secim1 = cbYaz.isSelected();
-        Boolean secim2 = cbYay.isSelected();
-        Boolean secim3 = cbPayiz.isSelected();
-        Boolean secim4 = cbQis.isSelected();
-        // ============================================================================================
-        int countForYaz = 0;
-        int countForYay = 0;
-        int countForPayiz = 0;
-        int countForQis = 0;
-
-        if (secim1 != false) { // Secim 1 in yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id = mehDao.getMehsulByMovsumId(4);
-            countForQis++;
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-
-            }
-
-            List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(1);
-            countForYaz++;
-            for (int i = 0; i < id2.size(); i++) {
-                cbMehsullar.addItem(id2.get(i));
-            }
-            if (secim2 != false) {
-                List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(2);
-                countForYay++;
-                for (int i = 0; i < id3.size(); i++) {
-                    cbMehsullar.addItem(id3.get(i));
-                }
-
-            }
-
-        }
-
-        // Secim 2 in yoxlanisi buradan baslayir
-        if (secim2 != false) {
-            cbMehsullar.removeAllItems();
-            if (secim1 != false) {
-                List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-                for (int i = 0; i < id.size(); i++) {
-                    cbMehsullar.addItem(id.get(i));
-                }
-
-            }
-
-            List<Mehsullar> id2 = mehDao.getMehsulByMovsumId(2);
-            countForYay++;
-            for (int i = 0; i < id2.size(); i++) {
-                cbMehsullar.addItem(id2.get(i));
-            }
-            List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(4);
-            countForQis++;
-            for (int i = 0; i < id3.size(); i++) {
-                cbMehsullar.addItem(id3.get(i));
-            }
-            if (secim3 != false) {
-                List<Mehsullar> id4 = mehDao.getMehsulByMovsumId(3);
-                for (int i = 0; i < id4.size(); i++) {
-                    cbMehsullar.addItem(id4.get(i));
-                }
-
-            }
-        }
-
-        if (secim3 != false) { // Secim 3 un yoxlanisi buradan baslayir
-            cbMehsullar.removeAllItems();
-            if (secim1 != false) {
-                List<Mehsullar> id = mehDao.getMehsulByMovsumId(1);
-                for (int i = 0; i < id.size(); i++) {
-                    cbMehsullar.addItem(id.get(i));
-                }
-
-            }
-            if (secim2 != false) {
-                List<Mehsullar> id5 = mehDao.getMehsulByMovsumId(2);
-                for (int i = 0; i < id5.size(); i++) {
-                    cbMehsullar.addItem(id5.get(i));
-                }
-            }
-
-            List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(4);
-            for (int i = 0; i < id3.size(); i++) {
-                cbMehsullar.addItem(id3.get(i));
-
-            }
-
-            if (secim4 != false) {
-                List<Mehsullar> id5 = mehDao.getMehsulByMovsumId(3);
-                for (int i = 0; i < id5.size(); i++) {
-                    cbMehsullar.addItem(id5.get(i));
-                    countForQis++;
-                }
-
-            }
-
-        } else if (secim4 != false & countForQis <= 0) {
-            cbMehsullar.removeAllItems();
-            List<Mehsullar> id3 = mehDao.getMehsulByMovsumId(4);
-            for (int i = 0; i < id3.size(); i++) {
-                cbMehsullar.addItem(id3.get(i));
-            }
-
-        }
-
-    }
-
-    private void fillMehsullarByIdYaz() {
-        Boolean secim1 = cbYaz.isSelected();
-        if (secim1 != false) {
-            fillWindowForYaz();
-        }
-
-    }
-
-    private void fillMehsullarByIdYay() {
-        Boolean secim2 = cbYay.isSelected();
-        if (secim2 != false) {
-            fillWindowForYay();
-
-        }
-
-    }
-
-    private void fillMehsullarByIdPayiz() {
-        Boolean secim3 = cbPayiz.isSelected();
-        if (secim3 != false) {
-            fillWindowForPayiz();
-
-        }
-
-    }
-
-    private void fillMehsullarByIdQis() {
-        Boolean secim4 = cbQis.isSelected();
-        if (secim4 != false) {
-
-            fillWindowForQis();
-
-        }
-
-    }
-
-    private void cbYazActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbYazActionPerformed
-
-        fillMehsullarByIdYaz();
-
-    }// GEN-LAST:event_cbYazActionPerformed
-
-    private void cbYayActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbYayActionPerformed
-        fillMehsullarByIdYay();
-    }// GEN-LAST:event_cbYayActionPerformed
-
-    private void cbPayizActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbPayizActionPerformed
-
-        fillMehsullarByIdPayiz();
-    }// GEN-LAST:event_cbPayizActionPerformed
-
-    private void cbQisActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbQisActionPerformed
-        fillMehsullarByIdQis();
-    }// GEN-LAST:event_cbQisActionPerformed
-
-    private void cbKisiActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbKisiActionPerformed
-
-        cbMehsullar.removeAllItems();
-        Boolean secim1 = cbYaz.isSelected();
-        Boolean secim2 = cbYay.isSelected();
-        Boolean secim3 = cbPayiz.isSelected();
-        Boolean secim4 = cbQis.isSelected();
-        if (secim1 != false) { // 1ci secimin yoxlanisi
-            int seasonId = 1;
-            List<Mehsullar> id = mehDao.getMehsulByCategoryAndSeasonId(1, seasonId);
-
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-            }
-        }
-        if (secim2 != false) { // 2ci secimin yoxlanisi
-            cbMehsullar.removeAllItems();
-            int seasonId = 2;
-
-            List<Mehsullar> id = mehDao.getMehsulByCategoryAndSeasonId(1, seasonId);
-            for (int i = 0; i < id.size(); i++) {
-                cbMehsullar.addItem(id.get(i));
-            }
-            if (secim1 != false) {
-                int seasonIdYay = 1;
-                List<Mehsullar> id2 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdYay);
-                for (int ii = 0; ii < id2.size(); ii++) {
-                    cbMehsullar.addItem(id2.get(ii));
-                }
-
-            }
-            if (secim3 != false) {
-                int seasonIdPayiz = 3;
-                List<Mehsullar> id3 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdPayiz);
-                for (int ii = 0; ii < id3.size(); ii++) {
-                    cbMehsullar.addItem(id3.get(ii));
-                }
-
-            }
-            if (secim4 != false) {
-                int seasonIdPayiz = 3;
-                List<Mehsullar> id3 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdPayiz);
-                for (int ii = 0; ii < id3.size(); ii++) {
-                    cbMehsullar.addItem(id3.get(ii));
-                }
-            }
-
-        }
-        if (secim3 != false) { // 3cu secimin yoxlanisi
-            cbMehsullar.removeAllItems();
-            int seasonIdPayiz = 3;
-            List<Mehsullar> id2 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdPayiz);
-            for (int ii = 0; ii < id2.size(); ii++) {
-                cbMehsullar.addItem(id2.get(ii));
-            }
-            if (secim1 != false) {
-                int seasonIdYaz = 1;
-                List<Mehsullar> id3 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdYaz);
-                for (int ii = 0; ii < id3.size(); ii++) {
-                    cbMehsullar.addItem(id3.get(ii));
-                }
-            }
-
-            if (secim2 != false) {
-                int seasonIdYay = 2;
-                List<Mehsullar> id4 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdYay);
-                for (int ii = 0; ii < id4.size(); ii++) {
-                    cbMehsullar.addItem(id4.get(ii));
-                }
-            }
-            if (secim4 != false) {
-                int seasonIdQis = 4;
-                List<Mehsullar> id4 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdQis);
-                for (int ii = 0; ii < id4.size(); ii++) {
-                    cbMehsullar.addItem(id4.get(ii));
-                }
-            }
-
-        }
-
-        if (secim4 != false) { // 4cu secimin yoxlanilmasi
-            cbMehsullar.removeAllItems();
-            int seasonIdQis = 4;
-            List<Mehsullar> id4 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdQis);
-            for (int ii = 0; ii < id4.size(); ii++) {
-                cbMehsullar.addItem(id4.get(ii));
-            }
-
-            if (secim1 != false) {
-                int seasonIdYaz = 1;
-                List<Mehsullar> id3 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdYaz);
-                for (int ii = 0; ii < id3.size(); ii++) {
-                    cbMehsullar.addItem(id3.get(ii));
-                }
-
-            }
-            if (secim2 != false) {
-                int seasonIdYay = 2;
-                List<Mehsullar> id2 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdYay);
-                for (int ii = 0; ii < id2.size(); ii++) {
-                    cbMehsullar.addItem(id2.get(ii));
-                }
-            }
-            if (secim3 != false) {
-                int seasonIdPayiz = 3;
-                List<Mehsullar> id2 = mehDao.getMehsulByCategoryAndSeasonId(1, seasonIdPayiz);
-                for (int ii = 0; ii < id2.size(); ii++) {
-                    cbMehsullar.addItem(id2.get(ii));
-                }
-            }
-
-        } // GEN-LAST:event_cbKisiActionPerformed
-    }
-
     private void cbUsaqActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbUsaqActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_cbUsaqActionPerformed
@@ -3419,13 +2316,8 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     }// GEN-LAST:event_cbQarisiqActionPerformed
 
     private void cbKisiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_cbKisiMouseClicked
-        cbAltKateqoriyalar.removeAllItems();
 
-        List<AltKateqoriyalar> id555 = mehDao2.getAltKateqoriyaBySeasonIdKisi();
-        for (int ii = 0; ii < id555.size(); ii++) {
-            cbAltKateqoriyalar.addItem(id555.get(ii));
-        }
-    }// GEN-LAST:event_cbKisiMouseClicked
+    }
 
     private void cbAltKateqoriyalarItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_cbAltKateqoriyalarItemStateChanged
         TextMalinAdi.setText("");
@@ -3440,267 +2332,15 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
         }
 
-    }// GEN-LAST:event_cbAltKateqoriyalarItemStateChanged
+    }
 
-    private void cbAltKateqoriyalarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbAltKateqoriyalarActionPerformed
-        MehsullarDaoInter mehDao = Contex.instanceOfMehsullarDao();
-        boolean SecimYay = cbYay.isSelected();
-        boolean SecimYaz = cbYaz.isSelected();
-        boolean SecimPayiz = cbPayiz.isSelected();
-        boolean SecimQis = cbQis.isSelected();
+    private void cbAltKateqoriyalarMouseClicked(java.awt.event.MouseEvent evt) {
 
-        // ==================== Yaz movsumunun yoxlanilmasi
-        // ===============================
-        boolean SecimKisi = cbKisi.isSelected();
-        boolean SecimQadin = cbQadin.isSelected();
-        boolean SecimUsaq = cbUsaq.isSelected();
-        boolean SecimQarisiq = cbQarisiq.isSelected();
-
-        if (SecimYaz != false) {
-
-            if (SecimKisi != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimYaz1 = 1;
-                int SecimKisi1 = 1;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimKisi1,
-                        NumberOfSubCategory + 1, SecimYaz1);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-                }
-
-            }
-            if (SecimQadin != false) {
-
-                cbMehsullar_2.removeAllItems();
-                int SecimYaz1 = 1;
-                int SecimQadin2 = 2;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimQadin2,
-                        NumberOfSubCategory, SecimYaz1);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-                }
-
-            }
-            if (SecimUsaq != false) {
-
-                cbMehsullar_2.removeAllItems();
-                int SecimYaz1 = 1;
-                int SecimUsaq3 = 3;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimUsaq3,
-                        NumberOfSubCategory + 1, SecimYaz1);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-                }
-
-            }
-            if (SecimQarisiq != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimYaz1 = 1;
-                int SecimQarisiq4 = 4;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimQarisiq4,
-                        NumberOfSubCategory + 1, SecimYaz1);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-                }
-
-            }
-
-        }
-        // ==================== Yay movsumunun yoxlanilmasi
-        // ===============================
-        if (SecimYay != false) {
-            if (SecimKisi != false) {
-                if (SecimKisi != false) {
-                    cbMehsullar_2.removeAllItems();
-                    int SecimYay1 = 2;
-                    int SecimKisi1 = 1;
-                    int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                    List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimKisi1,
-                            NumberOfSubCategory + 1, SecimYay1);
-                    for (int i = 0; i < id1.size(); i++) {
-                        cbMehsullar_2.addItem(id1.get(i).toString());
-                    }
-
-                }
-
-            }
-
-            if (SecimQadin != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimYay1 = 2;
-                int SecimQadin2 = 2;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimQadin2,
-                        NumberOfSubCategory + 1, SecimYay1);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-                }
-
-            }
-            if (SecimUsaq != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimYay1 = 2;
-                int SecimUsaq3 = 3;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimUsaq3,
-                        NumberOfSubCategory + 1, SecimYay1);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-                }
-
-            }
-            if (SecimQarisiq != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimYay1 = 2;
-                int SecimQarisiq4 = 4;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimQarisiq4,
-                        NumberOfSubCategory + 1, SecimYay1);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-                }
-
-            }
-
-        }
-        // ==================== Qis movsumunun yoxlanilmasi
-        // ===============================
-        if (SecimQis != false) {
-
-            if (SecimKisi != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimQis4 = 4;
-                int SecimKisi1 = 1;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimKisi1,
-                        NumberOfSubCategory + 1, SecimQis4);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-
-                }
-
-            }
-
-            if (SecimQadin != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimQis4 = 4;
-                int SecimQadin2 = 2;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimQadin2,
-                        NumberOfSubCategory + 1, SecimQis4);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-
-                }
-
-            }
-
-            if (SecimUsaq != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimQis4 = 4;
-                int SecimUsaq1 = 3;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimUsaq1,
-                        NumberOfSubCategory + 1, SecimQis4);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-
-                }
-
-            }
-            if (SecimQarisiq != false) {
-                cbMehsullar_2.removeAllItems();
-                int SecimQis4 = 4;
-                int SecimQarisiq4 = 4;
-                int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-
-                List<Mehsullar> id1 = mehDao.getMehsulByCategoryAndSubCategoryAndSeasonId(SecimQarisiq4,
-                        NumberOfSubCategory + 1, SecimQis4);
-                for (int i = 0; i < id1.size(); i++) {
-                    cbMehsullar_2.addItem(id1.get(i).toString());
-
-                }
-
-            }
-
-        }
-
-    }// GEN-LAST:event_cbAltKateqoriyalarActionPerformed
-
-    private void cbAltKateqoriyalarMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_cbAltKateqoriyalarMouseClicked
-
-    }// GEN-LAST:event_cbAltKateqoriyalarMouseClicked
+    }
 
     private void TextMalinAdiActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TextMalinAdiActionPerformed
 
-        // boolean yoxla = TextMalinAdi.getText().isEmpty();
-        //
-        // if(yoxla != true){
-        // int id = Integer.parseInt(txtBarcode_reader.getText());
-        // Mehsullar mm = mehDao.getMehsulById(id);
-        //
-        // TextMalinAdi.setText(mm.getName());
-        //
-        //
-        //
-        // }
-        // boolean MovsumQis = cbQis.isSelected();
-        // boolean SecimQadin = cbQadin.isSelected();
-        // boolean SecimKisi = cbKisi.isSelected();
-        //
-        // if (MovsumQis != false) {
-        //
-        // if (SecimQadin != false) {
-        //
-        // int MovsumQis1 = 4;
-        // int SecimQadin2 = 2;
-        // int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-        // String name = TextMalinAdi.getText();
-        //
-        // List<Qiymetler> id1 =
-        // QiymetDao.getPriceByCategoryAndSubCategoryAndSeasonIdAndByName(SecimQadin2,
-        // NumberOfSubCategory + 9, MovsumQis1, name);
-        //
-        // for (int i = 0; i < id1.size(); i++) {
-        //
-        // }
-        //
-        // }
-        // if (SecimKisi != false) {
-        //
-        // int MovsumQis1 = 4;
-        // int SecimKisi1 = 1;
-        // int NumberOfSubCategory = cbAltKateqoriyalar.getSelectedIndex();
-        // String name = TextMalinAdi.getText();
-        //
-        // List<Qiymetler> id1 =
-        // QiymetDao.getPriceByCategoryAndSubCategoryAndSeasonIdAndByName(SecimKisi1,
-        // NumberOfSubCategory, MovsumQis1, name);
-        //
-        // for (int i = 0; i < id1.size(); i++) {
-        //
-        // }
-        //
-        // }
-        //
-        // }
-        //
-    }// GEN-LAST:event_TextMalinAdiActionPerformed
+    }
 
     private void cbMehsullarItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_cbMehsullarItemStateChanged
 
@@ -3720,7 +2360,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     private void cbMehsullar_2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbMehsullar_2ActionPerformed
 
-        findPrice();
     }// GEN-LAST:event_cbMehsullar_2ActionPerformed
 
     private void cbMehsullarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbMehsullarActionPerformed
@@ -3765,12 +2404,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     private void cbQadinMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_cbQadinMouseClicked
 
-        cbAltKateqoriyalar.removeAllItems();
-        List<AltKateqoriyalar> id555 = mehDao2.getAltKateqoriyaBySeasonIdQadin();
-        for (int ii = 0; ii < id555.size(); ii++) {
-            cbAltKateqoriyalar.addItem(id555.get(ii));
-        }
-
     }// GEN-LAST:event_cbQadinMouseClicked
 
     private void TextMalinAdiPropertyChange(java.beans.PropertyChangeEvent evt) {// GEN-FIRST:event_TextMalinAdiPropertyChange
@@ -3788,9 +2421,9 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         //
         //
 
-    }// GEN-LAST:event_TextMalinAdiPropertyChange
+    }
 
-    private void TextMalinMiqdariActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TextMalinMiqdariActionPerformed
+    private void TextMalinMiqdariActionPerformed(java.awt.event.ActionEvent evt) {
 
         DecimalFormat dformater = new DecimalFormat("#.##");
 
@@ -3823,25 +2456,25 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     }// GEN-LAST:event_TextMalinMiqdariActionPerformed
 
-    private void btnElaveEtActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnElaveEtActionPerformed
+    private void btnElaveEtActionPerformed(java.awt.event.ActionEvent evt) {
 
         Sebeteadd();
 
-    }// GEN-LAST:event_btnElaveEtActionPerformed
+    }
 
-    private void txtMovsumIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtMovsumIdActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtMovsumIdActionPerformed
+    private void txtMovsumIdActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void textKateqoriyaIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_textKateqoriyaIdActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_textKateqoriyaIdActionPerformed
+    }
 
-    private void txtAltKateqoriyaIDActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtAltKateqoriyaIDActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtAltKateqoriyaIDActionPerformed
+    private void textKateqoriyaIdActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void txtSatisTarixiActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtSatisTarixiActionPerformed
+    }
+
+    private void txtAltKateqoriyaIDActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
+
+    private void txtSatisTarixiActionPerformed(java.awt.event.ActionEvent evt) {
         Date date = new Date();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
@@ -3849,31 +2482,31 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
         txtSatisTarixi.setText(date2);
 
-    }// GEN-LAST:event_txtSatisTarixiActionPerformed
+    }
 
-    private void txtAlisQiymetiActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtAlisQiymetiActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtAlisQiymetiActionPerformed
+    private void txtAlisQiymetiActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtIDActionPerformed
+    }
 
-    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseClicked
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jPanel1MouseClicked
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void txtUmumiActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtUmumiActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtUmumiActionPerformed
+    }
 
-    private void btnSatildiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnSatildiMouseClicked
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {
+
+    }
+
+    private void txtUmumiActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
+
+    private void btnSatildiMouseClicked(java.awt.event.MouseEvent evt) {
 
         satisEmeliyyati();
 
-    }// GEN-LAST:event_btnSatildiMouseClicked
+    }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         btnSatildi.setVisible(false);
 
         df = (DefaultTableModel) tblAlinanMallar.getModel();
@@ -4056,23 +2689,9 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     private void cbUsaqMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_cbUsaqMouseClicked
 
-        cbAltKateqoriyalar.removeAllItems();
-
-        List<AltKateqoriyalar> id555 = mehDao2.getAltKateqoriyaBySeasonIdUsaq();
-        for (int ii = 0; ii < id555.size(); ii++) {
-            cbAltKateqoriyalar.addItem(id555.get(ii));
-        }
-
     }// GEN-LAST:event_cbUsaqMouseClicked
 
     private void cbQarisiqMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_cbQarisiqMouseClicked
-
-        cbAltKateqoriyalar.removeAllItems();
-
-        List<AltKateqoriyalar> id555 = mehDao2.getAltKateqoriyaBySeasonIdQarisiq();
-        for (int ii = 0; ii < id555.size(); ii++) {
-            cbAltKateqoriyalar.addItem(id555.get(ii));
-        }
 
     }// GEN-LAST:event_cbQarisiqMouseClicked
 
@@ -4106,11 +2725,11 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         btnElaveEt.setVisible(true);
         btnSatildi.setVisible(true);
 
-    }// GEN-LAST:event_btnCancelMouseClicked
+    }
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_btnCancelActionPerformed
+       
+    }
 
     private void TextMalinMiqdariKeyReleased(java.awt.event.KeyEvent evt) {
 
@@ -4176,40 +2795,18 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
         int id = Integer.parseInt(df.getValueAt(selected, 0).toString());
         TextMalinAdi.setText(df.getValueAt(selected, 1).toString());
-        // TextMalinMiqdari.setText(df.getValueAt(selected, 2).toString());
         txtQiymet.setText(df.getValueAt(selected, 2).toString());
         txtMovsumId.setText(df.getValueAt(selected, 3).toString());
         textKateqoriyaId.setText(df.getValueAt(selected, 4).toString());
         txtAltKateqoriyaID.setText(df.getValueAt(selected, 5).toString());
-        // txtSatisTarixi.setText(df.getValueAt(selected, 8).toString());
-        // txtUmumi.setText(df.getValueAt(selected, 7).toString());
+       
 
         txtID.setText(Integer.toString(id));
-    }// GEN-LAST:event_tblAxtarisMouseClicked
+    }
 
     private void txtBarcode_readerKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtBarcode_readerKeyReleased
-        //
-        // barcodeReader();
-        //
-        // boolean yoxla = TextMalinAdi.getText().isEmpty();
-        //
-        // if (yoxla != true) {
-        // String barcode = txtBarcode_reader.getText();
-        // Mehsullar mm = mehDao.getMehsulByBarcode(barcode);
-        //
-        // TextMalinAdi.setText(mm.getName());
-        // txtQiymet.setText(mm.getPriceOfSell());
-        // txtMovsumId.setText(mm.getSeasonId());
-        // textKateqoriyaId.setText(mm.getCategoryId());
-        // txtAltKateqoriyaID.setText(mm.getSubCategoryId());
-        //
-        // int id2 = mm.getId();
-        // txtID.setText(Integer.toString(id2));
-        //
-        // }
-        //
-
-    }// GEN-LAST:event_txtBarcode_readerKeyReleased
+       
+    }
 
     private void txtBarcode_readerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtBarcode_readerActionPerformed
         String barcode = txtBarcode_reader.getText();
@@ -4467,27 +3064,16 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JButton btnNum7;
     private javax.swing.JButton btnNum8;
     private javax.swing.JButton btnNum9;
-    private javax.swing.JButton btnPercentage;
     private javax.swing.JButton btnPlus;
     private javax.swing.JButton btnSatildi;
-    private javax.swing.JComboBox<AltKateqoriyalar> cbAltKateqoriyalar;
-    private javax.swing.JCheckBox cbKisi;
-    private javax.swing.JComboBox<Mehsullar> cbMehsullar;
-    private javax.swing.JComboBox<String> cbMehsullar_2;
     private javax.swing.JCheckBox cbNagd;
     private javax.swing.JCheckBox cbNisye;
-    private javax.swing.JCheckBox cbPayiz;
-    private javax.swing.JCheckBox cbQadin;
-    private javax.swing.JCheckBox cbQarisiq;
-    private javax.swing.JCheckBox cbQis;
-    private javax.swing.JCheckBox cbUsaq;
-    private javax.swing.JCheckBox cbYay;
-    private javax.swing.JCheckBox cbYaz;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLMalinQiymeti;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -4497,8 +3083,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4506,8 +3090,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -4515,7 +3097,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblTime;
     private javax.swing.JTable tblAlinanMallar;
     private javax.swing.JTable tblAxtaris;
     private javax.swing.JTextField textKateqoriyaId;
