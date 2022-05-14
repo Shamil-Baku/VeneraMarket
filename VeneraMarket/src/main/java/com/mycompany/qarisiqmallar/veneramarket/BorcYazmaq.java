@@ -40,15 +40,11 @@ public class BorcYazmaq extends javax.swing.JFrame {
     public void sebetinSilinmesi() {
 
         try {
-            connect();
-
             String query2 = "delete from sebet";
-
             stmt = con.createStatement();
             stmt.execute(query2);
-
         } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }
@@ -86,7 +82,7 @@ public class BorcYazmaq extends javax.swing.JFrame {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(Satici_Elave_Etmek.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }
@@ -493,16 +489,11 @@ public class BorcYazmaq extends javax.swing.JFrame {
 
         int selected = tblBorcSiyahisi.getSelectedRow();
 
-        // String BorcAlaninAdi =(df.getValueAt(selected, 0).toString());
-        // txtBorcAlaninAdi.setText(df.getValueAt(selected, 0).toString());
         txtMehsul.setText(df.getValueAt(selected, 1).toString());
         txtID.setText(df.getValueAt(selected, 2).toString());
         txtMiqdari.setText(df.getValueAt(selected, 3).toString());
         txtQiymeti.setText(df.getValueAt(selected, 4).toString());
         txtUmumiMebleg.setText(df.getValueAt(selected, 5).toString());
-        //txtQismenOdenis.setText(df.getValueAt(selected, 6).toString());
-        // txtQaliqBorc.setText(df.getValueAt(selected, 7).toString());
-
 
     }//GEN-LAST:event_tblBorcSiyahisiMouseClicked
 
@@ -578,25 +569,7 @@ public class BorcYazmaq extends javax.swing.JFrame {
                 pres = con.prepareStatement("update mehsullar set Qaliq_say = Miqdari - Satis_miqdari  where id = ?;");
                 pres.setInt(1, ID);
                 pres.executeUpdate();
-                
-//                pres = con.prepareStatement("truncate table sebet;");
-//                pres.executeUpdate();
 
-//                 String query = "insert into satilan_mallar ( id, Malin_adi, Miqdari, Satis_qiymeti, Umumi_Mebleg, Satis_Tarixi, Borc_Alanin_Adi,OdenisinNovu, QiemenOdenis, Borcdan_Gelen) values(?,?,?,?,?,?,?,?,?,?)";
-//
-//                            pres = con.prepareStatement(query);
-//                            pres.setInt(1, 0);
-//                            pres.setString(2, "Borcdan-" + Mehsul);
-//                            pres.setInt(3, Miqdari);
-//                            pres.setDouble(4, Qiymeti);
-//                            pres.setDouble(5, UmumiMebleg);
-//                            pres.setString(6, SatisTarixi);
-//                            pres.setString(7, borcAlaninAdi);
-//                            pres.setString(8, "Borcdan gələn");
-//                            pres.setDouble(9, qismenOdenis);
-//                            pres.setDouble(10, umumimebleg);
-//
-//                            pres.execute();
                 JOptionPane.showMessageDialog(this, "Borc qeyd olundu");
 
             }
@@ -618,7 +591,7 @@ public class BorcYazmaq extends javax.swing.JFrame {
         } else {
 
             int ID;
-            double Qiymeti, UmumiMebleg, QismenOdenis, QaliqBorc , Miqdari;
+            double Qiymeti, UmumiMebleg, QismenOdenis, QaliqBorc, Miqdari;
             String BorcAlaninAdi, Mehsul, Tarix;
             try {
                 connect();
@@ -648,29 +621,8 @@ public class BorcYazmaq extends javax.swing.JFrame {
                     pres.setDouble(8, QaliqBorc);
                     pres.setString(9, Tarix);
                     pres.execute();
-                
 
-//                df = (DefaultTableModel) tblBorcSiyahisi.getModel();
-//
-//                double qaliqBorc, qiymeti, umumiMebleg, qismenOdenis;
-//                String borcAlaninAdi2, Mehsul2, SatisTarixi;
-//                int MehsulID2, Miqdari2;
-
-//                for (int i = 0; i < df.getRowCount(); i++) {
-//
-//                    qaliqBorc = Double.parseDouble(df.getValueAt(i, 7).toString());
-//                    umumiMebleg = Double.parseDouble(df.getValueAt(i, 5).toString());
-//
-//                    borcAlaninAdi2 = df.getValueAt(i, 0).toString();
-//                    Mehsul2 = df.getValueAt(i, 1).toString();
-//                    MehsulID2 = Integer.parseInt(df.getValueAt(i, 2).toString());
-//                    Miqdari2 = Integer.parseInt(df.getValueAt(i, 4).toString());
-//                    qiymeti = Double.parseDouble(df.getValueAt(i, 5).toString());
-//                    umumiMebleg = Double.parseDouble(df.getValueAt(i, 6).toString());
-//                    qismenOdenis = Double.parseDouble(df.getValueAt(i, 7).toString());
-//                    SatisTarixi = df.getValueAt(i, 10).toString();
-
-                    if ( QaliqBorc != UmumiMebleg) {
+                    if (QaliqBorc != UmumiMebleg) {
 
                         String query2 = "insert into satilan_mallar ( id, Malin_adi, Miqdari, Satis_qiymeti, Umumi_Mebleg, Satis_Tarixi, Borc_Alanin_Adi,OdenisinNovu, QiemenOdenis, Borcdan_Gelen) values(?,?,?,?,?,?,?,?,?,?)";
 
@@ -690,7 +642,6 @@ public class BorcYazmaq extends javax.swing.JFrame {
 
                     }
                 }
-                
 
                 sebetinSilinmesi();
 
