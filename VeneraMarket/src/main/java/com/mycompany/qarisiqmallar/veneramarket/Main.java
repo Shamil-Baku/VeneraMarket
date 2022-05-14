@@ -60,7 +60,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     SimpleDateFormat sdf4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a");
     String date3 = sdf.format(date);
 
-    int say = 1;
+    int saySebetUcun = 1;
     
     // Date
     String time555;
@@ -141,7 +141,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         cbNisye = new javax.swing.JCheckBox();
         btnDuzelisEt = new javax.swing.JButton();
         btnElaveEt = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSil = new javax.swing.JButton();
         btnSatildi = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnGeriQaytar = new javax.swing.JButton();
@@ -658,13 +658,13 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("SIl");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSil.setBackground(new java.awt.Color(255, 0, 0));
+        btnSil.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSil.setForeground(new java.awt.Color(255, 255, 255));
+        btnSil.setText("SIl");
+        btnSil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSilActionPerformed(evt);
             }
         });
 
@@ -727,7 +727,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btnSil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDuzelisEt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -755,7 +755,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                                 .addGap(2, 2, 2)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnDuzelisEt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnSatildi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1470,7 +1470,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             if (df.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(this, "Səbət boşdur!");
 
-                say = 1;
+                saySebetUcun = 1;
                 txtBarcode_reader.requestFocus();
 
                 TextMalinAdi.setText("");
@@ -1550,7 +1550,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
             //int satisMiq2 = mehDao.exploreMehsulById(id);
             //int say = explore.size();
-            txtAxtaris.setText(Integer.toString(say));
+            txtAxtaris.setText(Integer.toString(saySebetUcun));
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1585,7 +1585,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         } else {
             String ID, Malin_adi, Miqdari, Qiymeti, Movsum_ID, Kateqoriya_ID, Alt_Kateqoriya_ID, Ümumi_Məbləğ, Tarix;
             try {
-                // connect();
 
                 try {
                     if (yoxla != false) {
@@ -1653,7 +1652,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                         txtOdenis.setText("");
                         txtQaliq.setText("");
                         txtBarcode_reader.requestFocus();
-                        say = 1;
+                        saySebetUcun = 1;
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -1718,7 +1717,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                     pres = con.prepareStatement(
                             "insert into sebet (id2, id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Tarix ) values(?,?,?,?,?,?,?,?,?,?)");
 
-                    pres.setInt(1, say);
+                    pres.setInt(1, saySebetUcun);
                     pres.setInt(2, id);
                     pres.setString(3, malinadi);
                     pres.setInt(4, miqdari);
@@ -1729,7 +1728,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                     pres.setDouble(9, qiymet * miqdari);
                     pres.setString(10, alisTarixi);
                     pres.executeUpdate();
-                    say++;
+                    saySebetUcun++;
 
                     TextMalinAdi.setText("");
                     TextMalinMiqdari.setText("");
@@ -2036,15 +2035,11 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     public void sebetinSilinmesi() {
 
         try {
-            connect();
-
             String query2 = "delete from sebet";
-
             stmt = con.createStatement();
             stmt.execute(query2);
-
         } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }
@@ -2505,8 +2500,8 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         satisEmeliyyati();
 
     }
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+//burada
+    private void btnSilActionPerformed(java.awt.event.ActionEvent evt) {
         btnSatildi.setVisible(false);
 
         df = (DefaultTableModel) tblAlinanMallar.getModel();
@@ -2526,7 +2521,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             if (df.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(this, "Səbət boşdur!");
 
-                say = 1;
+                saySebetUcun = 1;
                 txtBarcode_reader.requestFocus();
 
                 TextMalinAdi.setText("");
@@ -2830,7 +2825,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                 pres = con.prepareStatement(
                         "insert into sebet ( id2, id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Tarix ) values(?,?,?,?,?,?,?,?,?,?)");
 
-                pres.setInt(1, say);
+                pres.setInt(1, saySebetUcun);
                 pres.setInt(2, id);
                 pres.setString(3, name);
                 pres.setInt(4, 1);
@@ -2841,7 +2836,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                 pres.setDouble(9, priveOfSell * 1);
                 pres.setString(10, tarix);
                 pres.executeUpdate();
-                say++;
+                saySebetUcun++;
             } catch (Exception ex) {
 
                 System.out.println(ex);
@@ -3066,13 +3061,13 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JButton btnNum9;
     private javax.swing.JButton btnPlus;
     private javax.swing.JButton btnSatildi;
+    private javax.swing.JButton btnSil;
     private javax.swing.JCheckBox cbNagd;
     private javax.swing.JCheckBox cbNisye;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLMalinQiymeti;
     private javax.swing.JLabel jLabel1;
