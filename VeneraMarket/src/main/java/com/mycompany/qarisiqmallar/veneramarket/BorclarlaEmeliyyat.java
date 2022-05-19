@@ -678,19 +678,28 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                         qismenOdenis = Double.parseDouble(df.getValueAt(i, 7).toString());
                         SatisTarixi = df.getValueAt(i, 10).toString();
 
-                        String query = "insert into satilan_mallar ( id, Malin_adi, Miqdari, Satis_qiymeti, Umumi_Mebleg, Satis_Tarixi, Borc_Alanin_Adi,OdenisinNovu, QiemenOdenis, Borcdan_Gelen) values(?,?,?,?,?,?,?,?,?,?)";
+                        int say = 1;
+                        Statement stmt = con.createStatement();
+                        stmt.execute("select * from satilan_mallar");
+                        ResultSet rs = stmt.getResultSet();
+                        while (rs.next()) {
+                            say++;
+                        }
+
+                        String query = "insert into satilan_mallar ( Satis_ID, id, Malin_adi, Miqdari, Satis_qiymeti, Umumi_Mebleg, Satis_Tarixi, Borc_Alanin_Adi,OdenisinNovu, QiemenOdenis, Borcdan_Gelen) values(?,?,?,?,?,?,?,?,?,?,?)";
 
                         pres = con.prepareStatement(query);
-                        pres.setInt(1, 0);
-                        pres.setString(2, "Borcdan-" + Mehsul);
-                        pres.setDouble(3, Miqdari2);
-                        pres.setDouble(4, qiymeti);
-                        pres.setDouble(5, umumimebleg);
-                        pres.setString(6, SatisTarixi);
-                        pres.setString(7, borcAlaninAdi);
-                        pres.setString(8, "Borcdan gələn");
-                        pres.setDouble(9, qismenOdenis);
-                        pres.setDouble(10, umumimebleg);
+                        pres.setInt(1, say);
+                        pres.setInt(2, 0);
+                        pres.setString(3, "Borcdan-" + Mehsul);
+                        pres.setDouble(4, Miqdari2);
+                        pres.setDouble(5, qiymeti);
+                        pres.setDouble(6, umumimebleg);
+                        pres.setString(7, SatisTarixi);
+                        pres.setString(8, borcAlaninAdi);
+                        pres.setString(9, "Borcdan gələn");
+                        pres.setDouble(10, qismenOdenis);
+                        pres.setDouble(11, umumimebleg);
 
                         pres.execute();
 
@@ -710,7 +719,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
         double QaliqBorc2, qiymeti, umumimebleg, qismenOdenis, Miqdari;
         String borcAlaninAdi, Mehsul, SatisTarixi;
-        int MehsulID,BorcID;
+        int MehsulID, BorcID;
 
         try {
             connect();
@@ -740,20 +749,29 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                 qismenOdenis = Double.parseDouble(df.getValueAt(i, 7).toString());
                 SatisTarixi = df.getValueAt(i, 10).toString();
 
-                String query = "insert into satilan_mallar (id, Malin_adi, Miqdari, Satis_qiymeti,  Umumi_Mebleg, Satis_Tarixi, Borcdan_Gelen, QiemenOdenis, Borc_Alanin_Adi) values(?,?,?,?,?,?,?,?,?)";
+                int say = 1;
+                Statement stmt = con.createStatement();
+                stmt.execute("select * from satilan_mallar");
+                ResultSet rs = stmt.getResultSet();
+                while (rs.next()) {
+                    say++;
+                }
+
+                String query = "insert into satilan_mallar (Satis_ID, id, Malin_adi, Miqdari, Satis_qiymeti,  Umumi_Mebleg, Satis_Tarixi, Borcdan_Gelen, QiemenOdenis, Borc_Alanin_Adi) values(?,?,?,?,?,?,?,?,?,?)";
 
                 pres = con.prepareStatement(query);
 
                 //pres.setString(1, BorcAlaninAdi);
-                pres.setInt(1, MehsulID);
-                pres.setString(2, "Borcdan-" + Mehsul);
-                pres.setDouble(3, Miqdari);
-                pres.setDouble(4, qiymeti);
-                pres.setDouble(5, umumimebleg);
-                pres.setString(6, SatisTarixi);
-                pres.setDouble(7, umumimebleg);
-                pres.setDouble(8, qismenOdenis);
-                pres.setString(9, borcAlaninAdi);
+                pres.setInt(1, say);
+                pres.setInt(2, MehsulID);
+                pres.setString(3, "Borcdan-" + Mehsul);
+                pres.setDouble(4, Miqdari);
+                pres.setDouble(5, qiymeti);
+                pres.setDouble(6, umumimebleg);
+                pres.setString(7, SatisTarixi);
+                pres.setDouble(8, umumimebleg);
+                pres.setDouble(9, qismenOdenis);
+                pres.setString(10, borcAlaninAdi);
                 pres.execute();
 
                 df = (DefaultTableModel) tblBorcSiyahisi.getModel();
@@ -948,7 +966,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
             txtUmumiBorc.setText("");
             borcGostericileri();
             System.out.println("");
-            
+
             txtID.setText("");
             txtBorcID.setText("");
             txtMiqdari.setText("");
@@ -957,8 +975,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
             txtQismenOdenis.setText("");
             txtQaliqBorc.setText("");
             txtOdenis.setText("");
-            
-            
+
             // borcunSilinmesi();
         } catch (HeadlessException | NumberFormatException | SQLException ex) {
             System.out.println(ex);
@@ -1129,7 +1146,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      
+
         txtUmumiBorc.setText("");
         txtBorc.setText("");
         txtID.setText("");
