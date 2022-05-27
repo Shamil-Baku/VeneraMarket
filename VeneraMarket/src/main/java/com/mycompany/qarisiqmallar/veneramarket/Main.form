@@ -202,6 +202,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAxtaris">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtAxtarisActionPerformed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAxtarisKeyReleased"/>
@@ -219,6 +224,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBarcode_reader">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBarcode_readerActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBarcode_readerKeyPressed"/>
@@ -285,11 +295,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\git projects\VeneraMarket\VeneraMarket\src\main\java\pictures\icons8-arrow-pointing-left-48.png"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -385,7 +390,7 @@
             <Component class="javax.swing.JTable" name="tblAlinanMallar">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="10" rowCount="0">
@@ -1136,7 +1141,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\git projects\VeneraMarket\VeneraMarket\src\main\java\pictures\icons8-clear-symbol-24.png"/>
+                  <Image iconType="2" name="C:\GitHubProject\VeneraMarket-2\VeneraMarket\src\main\java\pictures\icons8-clear-symbol-24.png"/>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[80, 22]"/>
@@ -1465,7 +1470,7 @@
                   <Font name="Segoe UI" size="36" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\git projects\VeneraMarket\VeneraMarket\src\main\java\pictures\icons8-plus-slash-minus-50.png"/>
+                  <Image iconType="2" name="C:\GitHubProject\VeneraMarket-2\VeneraMarket\src\main\java\pictures\icons8-plus-slash-minus-50.png"/>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[80, 22]"/>

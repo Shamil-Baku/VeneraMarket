@@ -217,6 +217,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
             }
         });
 
+        txtAxtaris.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtAxtaris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAxtarisActionPerformed(evt);
@@ -232,6 +233,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Axtar..");
 
+        txtBarcode_reader.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtBarcode_reader.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBarcode_readerActionPerformed(evt);
@@ -272,8 +274,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         lblTime.setForeground(new java.awt.Color(255, 255, 255));
         lblTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTime.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket\\VeneraMarket\\src\\main\\java\\pictures\\icons8-arrow-pointing-left-48.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -327,7 +327,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                                 .addGap(21, 21, 21))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -337,7 +337,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 255));
 
-        tblAlinanMallar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tblAlinanMallar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         tblAlinanMallar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -804,7 +804,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         jButton2.setBackground(new java.awt.Color(255, 153, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket\\VeneraMarket\\src\\main\\java\\pictures\\icons8-clear-symbol-24.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\GitHubProject\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\icons8-clear-symbol-24.png")); // NOI18N
         jButton2.setMaximumSize(new java.awt.Dimension(80, 22));
         jButton2.setMinimumSize(new java.awt.Dimension(80, 22));
         jButton2.setPreferredSize(new java.awt.Dimension(80, 22));
@@ -974,7 +974,7 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         });
 
         jButton18.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jButton18.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket\\VeneraMarket\\src\\main\\java\\pictures\\icons8-plus-slash-minus-50.png")); // NOI18N
+        jButton18.setIcon(new javax.swing.ImageIcon("C:\\GitHubProject\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\icons8-plus-slash-minus-50.png")); // NOI18N
         jButton18.setMaximumSize(new java.awt.Dimension(80, 22));
         jButton18.setMinimumSize(new java.awt.Dimension(80, 22));
         jButton18.setPreferredSize(new java.awt.Dimension(80, 22));
