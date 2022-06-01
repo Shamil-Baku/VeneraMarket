@@ -145,6 +145,7 @@ com\mycompany\qarisiqmallar\veneramarket\Kassa$6.class
 com\mycompany\qarisiqmallar\veneramarket\Mehsul_Elave_etmek$21.class
 com\mycompany\qarisiqmallar\veneramarket\Mehsul_Elave_etmek$7.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimeleri.class
+com\mycompany\qarisiqmallar\veneramarket\Main$67.class
 com\mycompany\qarisiqmallar\veneramarket\BorcYazmaq$9.class
 com\mycompany\qarisiqmallar\veneramarket\Main$14.class
 com\mycompany\qarisiqmallar\veneramarket\Main$34.class
@@ -153,6 +154,7 @@ com\mycompany\qarisiqmallar\veneramarket\Mehsul_Elave_etmek$13.class
 com\mycompany\qarisiqmallar\veneramarket\Satici_Elave_Etmek$3.class
 com\mycompany\qarisiqmallar\veneramarket\MehsulDeyisdirilmesi$1.class
 com\mycompany\qarisiqmallar\veneramarket\Mehsul_Elave_etmek$8.class
+com\mycompany\qarisiqmallar\veneramarket\BorcYazmaq$12.class
 com\mycompany\qarisiqmallar\veneramarket\ExistingProducts$3.class
 com\mycompany\qarisiqmallar\veneramarket\Main$27.class
 com\mycompany\qarisiqmallar\veneramarket\Satici_Elave_Etmek$10.class
@@ -214,6 +216,7 @@ com\mycompany\qarisiqmallar\veneramarket\AlisQaimeleri$1.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimesi$8.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimeleri$8.class
 com\mycompany\qarisiqmallar\veneramarket\Main$66.class
+com\mycompany\qarisiqmallar\veneramarket\Main$ActionListenerImpl.class
 com\mycompany\qarisiqmallar\veneramarket\MehsulDeyisdirilmesi$15.class
 com\mycompany\qarisiqmallar\veneramarket\Main$8.class
 com\mycompany\qarisiqmallar\veneramarket\MehsulDeyisdirilmesi.class
@@ -242,6 +245,7 @@ com\mycompany\qarisiqmallar\veneramarket\AlisQaimesi$10.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimesiMehsullar$16.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimesi$9.class
 com\mycompany\qarisiqmallar\veneramarket\Main$5.class
+com\mycompany\qarisiqmallar\veneramarket\BorcYazmaq$11.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimeleri$6.class
 com\mycompany\qarisiqmallar\veneramarket\MehsulDeyisdirilmesi$30.class
 com\mycompany\qarisiqmallar\veneramarket\BorclarlaEmeliyyat$10.class
@@ -278,6 +282,7 @@ com\mycompany\qarisiqmallar\veneramarket\Mehsul_Elave_etmek$27.class
 com\mycompany\qarisiqmallar\veneramarket\BorclarlaEmeliyyat1$10.class
 com\mycompany\qarisiqmallar\veneramarket\Mehsul_Elave_etmek.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimesiMehsullar$15.class
+com\mycompany\qarisiqmallar\veneramarket\BorcYazmaq$13.class
 com\mycompany\qarisiqmallar\veneramarket\Satis_Bolmesi$1.class
 com\mycompany\qarisiqmallar\veneramarket\Main$46.class
 com\mycompany\qarisiqmallar\veneramarket\AlisQaimesiMehsullar$7.class

@@ -5,6 +5,7 @@
  */
 package com.mycompany.qarisiqmallar.veneramarket;
 
+import com.aspose.pdf.internal.html.drawing.Numeric;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -530,28 +531,13 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQismenOdenisActionPerformed
 
     public void borcGostericileri() {
+
         DecimalFormat dformater = new DecimalFormat("#.##");
-        try {
 
-            connect();
-
-        } catch (Exception ex) {
-            Logger.getLogger(BorclarlaEmeliyyat.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // String ID, Malin_adi, Miqdari, Qiymeti, Movsum_ID, Kateqoriya_ID, Ümumi_Məbləğ, Tarix;
         df = (DefaultTableModel) tblBorcSiyahisi.getModel();
         double QaliqBorc;
         for (int i = 0; i < df.getRowCount(); i++) {
 
-//            ID = df.getValueAt(i, 0).toString();
-//            Malin_adi = df.getValueAt(i, 1).toString();
-//            Miqdari = df.getValueAt(i, 2).toString();
-//            Qiymeti = df.getValueAt(i, 3).toString();
-//            Movsum_ID = df.getValueAt(i, 4).toString();
-//            Kateqoriya_ID = df.getValueAt(i, 5).toString();
-//            Alt_Kateqoriya_ID = df.getValueAt(i, 6).toString();
-//            Ümumi_Məbləğ = df.getValueAt(i, 7).toString();
             QaliqBorc = Double.parseDouble(df.getValueAt(i, 8).toString());
             String formattedQaliqBorc = dformater.format(QaliqBorc);
 
@@ -648,7 +634,8 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                     pres.executeUpdate();
                     borcunSilinmesi();
 
-                } else {
+                }
+                if (!txtOdenis.getText().isEmpty()) {
                     int mehsulID2, borcID2;
 
                     int mehsulID = Integer.parseInt(txtID.getText());
@@ -922,67 +909,88 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
         txtQismenOdenis.setText(df.getValueAt(selected, 7).toString());
         txtQaliqBorc.setText(df.getValueAt(selected, 8).toString());
         txtBorc.setText(df.getValueAt(selected, 8).toString());
+        txtOdenis.requestFocus();
 
     }//GEN-LAST:event_tblBorcSiyahisiMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        odenisEt();
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void odenisEt() {
+
         try {
             if (txtBorcAlaninAdi.getText().isEmpty() || txtMehsul.getText().isEmpty() || txtID.getText().isEmpty() || txtMiqdari.getText().isEmpty() || txtQiymeti.getText().isEmpty() || txtUmumiMebleg.getText().isEmpty() || txtQismenOdenis.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(this, "Zəhmət olmasa bütün məlumatları doldurun");
-            } else {
-
-                String BorcAlaninAdi = txtBorcAlaninAdi.getText();
-                String Mehsul = txtMehsul.getText();
-                int ID = Integer.parseInt(txtID.getText());
-                int IDBorc = Integer.parseInt(txtBorcID.getText());
-                double Miqdari = Double.parseDouble(txtMiqdari.getText());
-                double Qiymeti = Double.parseDouble(txtQiymeti.getText());
-                double UmumiMebleg = Double.parseDouble(txtUmumiMebleg.getText());
-                double QismenOdenis = Double.parseDouble(txtQismenOdenis.getText());
-                double QaliqBorc = Double.parseDouble(txtQaliqBorc.getText());
-                String odenisTarixi = txtOdenisTarixi.getText();
-
-                pres = con.prepareStatement("update borclar_siyahisi set Borc_alanin_adi = ?, Borca_goturduyu_mehsul=?, Mehsul_ID =?, Miqdari=?, Qiymeti=?, Umumi_mebleg=?, Qismen_odenis =?, Qaliq_borc=?, Borc_odeme_tarixi=?  where id = ?");
-
-                pres.setString(1, BorcAlaninAdi);
-                pres.setString(2, Mehsul);
-                pres.setInt(3, ID);
-                pres.setDouble(4, Miqdari);
-                pres.setDouble(5, Qiymeti);
-                pres.setDouble(6, UmumiMebleg);
-                pres.setDouble(7, QismenOdenis);
-                pres.setDouble(8, QaliqBorc);
-                pres.setString(9, odenisTarixi);
-                pres.setInt(10, IDBorc);
-
-                pres.executeUpdate();
-
+                JOptionPane.showMessageDialog(this, "Zəhmət olmasa bütün melumatları daxil edin!");
+                return;
             }
 
-            load();
-            loadAxtarisaGore();
-            satis();
-            txtUmumiBorc.setText("");
-            borcGostericileri();
-            System.out.println("");
+            if (txtOdenis.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Zəhmət olmasa ödeniş miqdarını daxil edin!");
+            } else {
 
-            txtID.setText("");
-            txtBorcID.setText("");
-            txtMiqdari.setText("");
-            txtQiymeti.setText("");
-            txtUmumiMebleg.setText("");
-            txtQismenOdenis.setText("");
-            txtQaliqBorc.setText("");
-            txtOdenis.setText("");
+                if (hesabla() == 0) {
 
+                    String BorcAlaninAdi = txtBorcAlaninAdi.getText();
+                    String Mehsul = txtMehsul.getText();
+                    int ID = Integer.parseInt(txtID.getText());
+                    int IDBorc = Integer.parseInt(txtBorcID.getText());
+                    double Miqdari = Double.parseDouble(txtMiqdari.getText());
+                    double Qiymeti = Double.parseDouble(txtQiymeti.getText());
+                    double UmumiMebleg = Double.parseDouble(txtUmumiMebleg.getText());
+                    double QismenOdenis = Double.parseDouble(txtQismenOdenis.getText());
+                    double QaliqBorc = Double.parseDouble(txtQaliqBorc.getText());
+                    String odenisTarixi = txtOdenisTarixi.getText();
+
+                    pres = con.prepareStatement("update borclar_siyahisi set Borc_alanin_adi = ?, Borca_goturduyu_mehsul=?, Mehsul_ID =?, Miqdari=?, Qiymeti=?, Umumi_mebleg=?, Qismen_odenis =?, Qaliq_borc=?, Borc_odeme_tarixi=?  where id = ?");
+
+                    pres.setString(1, BorcAlaninAdi);
+                    pres.setString(2, Mehsul);
+                    pres.setInt(3, ID);
+                    pres.setDouble(4, Miqdari);
+                    pres.setDouble(5, Qiymeti);
+                    pres.setDouble(6, UmumiMebleg);
+                    pres.setDouble(7, QismenOdenis);
+                    pres.setDouble(8, QaliqBorc);
+                    pres.setString(9, odenisTarixi);
+                    pres.setInt(10, IDBorc);
+
+                    pres.executeUpdate();
+
+                    load();
+                    loadAxtarisaGore();
+                    satis();
+                    borcGostericileri2();
+                    txtUmumiBorc.setText("");
+                    borcGostericileri();
+                    System.out.println("");
+
+                    txtID.setText("");
+                    txtBorcID.setText("");
+                    txtMiqdari.setText("");
+                    txtQiymeti.setText("");
+                    txtUmumiMebleg.setText("");
+                    txtQismenOdenis.setText("");
+                    txtQaliqBorc.setText("");
+                    txtOdenis.setText("");
+
+                }
+            }
             // borcunSilinmesi();
         } catch (HeadlessException | NumberFormatException | SQLException ex) {
             System.out.println(ex);
 
         }
 
-    }//GEN-LAST:event_jButton2MouseClicked
+    }
+
+    private void borcGostericileri2() {
+
+       
+        txtBorc.setText("");
+
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
@@ -1047,25 +1055,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
     private void txtOdenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOdenisActionPerformed
 
-        double odenis = Double.parseDouble(txtOdenis.getText());
-
-        txtQismenOdenis.setText(Double.toString(odenis));
-
-        double qaliqBorc = Double.parseDouble(txtQaliqBorc.getText());
-        double yeniOdenis = Double.parseDouble(txtOdenis.getText());
-
-        double yeniCem = qaliqBorc - yeniOdenis;
-
-        txtQaliqBorc.setText("");
-        txtQaliqBorc.setText(Double.toString(yeniCem));
-
-//        double qaliqBorc = Double.parseDouble(txtQaliqBorc.getText());
-//        double yeniOdenis = Double.parseDouble(txtOdenis.getText());
-//
-//        double yeniCem = qaliqBorc - yeniOdenis;
-//
-//        txtQaliqBorc.setText("");
-//        txtQaliqBorc.setText(Double.toString(yeniCem));
+        odenisEt();
 
     }//GEN-LAST:event_txtOdenisActionPerformed
 
@@ -1073,6 +1063,30 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_txtOdenisKeyReleased
+
+    private int hesabla() {
+
+        int plusMinus = 0;
+        double odenis = Double.parseDouble(txtOdenis.getText());
+
+        // txtQismenOdenis.setText(Double.toString(odenis));
+        double qaliqBorcIlkin = Double.parseDouble(txtQaliqBorc.getText());
+        double yeniOdenis = Double.parseDouble(txtOdenis.getText());
+
+        double yeniCem = qaliqBorcIlkin - yeniOdenis;
+
+        if (yeniCem < 0) {
+            JOptionPane.showMessageDialog(this, "Daxil edilen mebleğ borc mebleğinden çox ola bilmez!");
+            plusMinus = 1;
+
+        } else {
+            txtQismenOdenis.setText(Double.toString(odenis));
+            txtQaliqBorc.setText("");
+            txtQaliqBorc.setText(Double.toString(yeniCem));
+        }
+
+        return plusMinus;
+    }
 
     private void BaglaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BaglaMouseClicked
 
@@ -1082,23 +1096,6 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
     private void txtOdenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOdenisKeyPressed
 
-//     int s = evt.getKeyCode();
-//     
-//     
-//     
-//        if (s == 10) {
-//            
-//             double qaliqBorc = Double.parseDouble(txtQaliqBorc.getText());
-//        double yeniOdenis = Double.parseDouble(txtOdenis.getText());
-//
-//        double yeniCem = qaliqBorc - yeniOdenis;
-//
-//        txtQaliqBorc.setText("");
-//        txtQaliqBorc.setText(Double.toString(yeniCem));
-//
-//             
-//        }
-//        
 
     }//GEN-LAST:event_txtOdenisKeyPressed
 

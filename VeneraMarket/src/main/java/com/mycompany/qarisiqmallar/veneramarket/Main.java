@@ -552,6 +552,11 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         });
 
         cbNisye.setText("Nisyə");
+        cbNisye.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNisyeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -804,7 +809,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         jButton2.setBackground(new java.awt.Color(255, 153, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\GitHubProject\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\icons8-clear-symbol-24.png")); // NOI18N
         jButton2.setMaximumSize(new java.awt.Dimension(80, 22));
         jButton2.setMinimumSize(new java.awt.Dimension(80, 22));
         jButton2.setPreferredSize(new java.awt.Dimension(80, 22));
@@ -974,7 +978,6 @@ public class Main extends javax.swing.JFrame implements KeyListener {
         });
 
         jButton18.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jButton18.setIcon(new javax.swing.ImageIcon("C:\\GitHubProject\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\icons8-plus-slash-minus-50.png")); // NOI18N
         jButton18.setMaximumSize(new java.awt.Dimension(80, 22));
         jButton18.setMinimumSize(new java.awt.Dimension(80, 22));
         jButton18.setPreferredSize(new java.awt.Dimension(80, 22));
@@ -1434,6 +1437,10 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbNisyeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNisyeActionPerformed
+        txtBarcode_reader.requestFocus();
+    }//GEN-LAST:event_cbNisyeActionPerformed
 
     public String timeFormatter() {
 
@@ -1923,78 +1930,78 @@ public class Main extends javax.swing.JFrame implements KeyListener {
 
     }
 
-    public void add() {
-
-        try {
-            if (TextMalinAdi.getText().isEmpty() || TextMalinMiqdari.getText().isEmpty()
-                    || txtQiymet.getText().isEmpty() || txtMovsumId.getText().isEmpty()
-                    || textKateqoriyaId.getText().isEmpty() || txtAltKateqoriyaID.getText().isEmpty()
-                    || txtSatisTarixi.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(this, "Zəhmət olmasa bütün məlumatları doldurun");
-            } else {
-                String id = txtID.getText();
-                String malinadi = TextMalinAdi.getText();
-                String miqdari = TextMalinMiqdari.getText();
-                String qiymet = txtQiymet.getText();
-                String movsumId = txtMovsumId.getText();
-                String kateqoriyaId = textKateqoriyaId.getText();
-                String altKateqoriya = txtAltKateqoriyaID.getText();
-                double umumiMebleg = Double.parseDouble(txtUmumi.getText());
-                String alisTarixi = txtSatisTarixi.getText();
-
-                double kohneCemMebleg = Double.parseDouble(txtCemMebleg.getText());
-                double yeniCemMebleg = kohneCemMebleg + umumiMebleg;
-                txtCemMebleg.setText(Double.toString(yeniCemMebleg));
-
-                pres = con.prepareStatement(
-                        "insert into sebet ( id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Tarix ) values(?,?,?,?,?,?,?,?,?)");
-
-                pres.setString(1, id);
-                pres.setString(2, malinadi);
-                pres.setString(3, miqdari);
-                pres.setString(4, qiymet);
-                pres.setString(5, movsumId);
-                pres.setString(6, kateqoriyaId);
-                pres.setString(7, altKateqoriya);
-                pres.setDouble(8, umumiMebleg);
-                pres.setString(9, alisTarixi);
-                pres.executeUpdate();
-                load();
-                JOptionPane.showMessageDialog(this, "Məhsul məlumatları uğurla yeniləndi");
-
-                TextMalinAdi.setText("");
-                TextMalinMiqdari.setText("");
-                txtQiymet.setText("");
-                txtMovsumId.setText("");
-                textKateqoriyaId.setText("");
-                txtAltKateqoriyaID.setText("");
-
-                txtID.setText("");
-
-                boolean cem = txtCemMebleg.getText().isEmpty();
-
-                if (cem != true) {
-
-                    double umumi = Double.parseDouble(txtUmumi.getText());
-                    double cem6 = Double.parseDouble(txtCemMebleg.getText());
-                    double cem2 = cem6 + umumi;
-                    txtCemMebleg.setText(Double.toString(cem2));
-                    txtUmumi.setText("");
-                } else if (cem == true) {
-                    txtCemMebleg.setText(Double.toString(umumiMebleg));
-                    txtUmumi.setText("");
-                    TextMalinAdi.requestFocus();
-
-                }
-
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Satici_Elave_Etmek.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+//    public void add() {
+//
+//        try {
+//            if (TextMalinAdi.getText().isEmpty() || TextMalinMiqdari.getText().isEmpty()
+//                    || txtQiymet.getText().isEmpty() || txtMovsumId.getText().isEmpty()
+//                    || textKateqoriyaId.getText().isEmpty() || txtAltKateqoriyaID.getText().isEmpty()
+//                    || txtSatisTarixi.getText().isEmpty()) {
+//
+//                JOptionPane.showMessageDialog(this, "Zəhmət olmasa bütün məlumatları doldurun");
+//            } else {
+//                String id = txtID.getText();
+//                String malinadi = TextMalinAdi.getText();
+//                String miqdari = TextMalinMiqdari.getText();
+//                String qiymet = txtQiymet.getText();
+//                String movsumId = txtMovsumId.getText();
+//                String kateqoriyaId = textKateqoriyaId.getText();
+//                String altKateqoriya = txtAltKateqoriyaID.getText();
+//                double umumiMebleg = Double.parseDouble(txtUmumi.getText());
+//                String alisTarixi = txtSatisTarixi.getText();
+//
+//                double kohneCemMebleg = Double.parseDouble(txtCemMebleg.getText());
+//                double yeniCemMebleg = kohneCemMebleg + umumiMebleg;
+//                txtCemMebleg.setText(Double.toString(yeniCemMebleg));
+//
+//                pres = con.prepareStatement(
+//                        "insert into sebet ( id, Malin_adi, Miqdari, Satis_qiymeti, Movsum_id, Kateqoriya_id, Alt_kateqoriya_id, Umumi_Mebleg, Tarix ) values(?,?,?,?,?,?,?,?,?)");
+//
+//                pres.setString(1, id);
+//                pres.setString(2, malinadi);
+//                pres.setString(3, miqdari);
+//                pres.setString(4, qiymet);
+//                pres.setString(5, movsumId);
+//                pres.setString(6, kateqoriyaId);
+//                pres.setString(7, altKateqoriya);
+//                pres.setDouble(8, umumiMebleg);
+//                pres.setString(9, alisTarixi);
+//                pres.executeUpdate();
+//                load();
+//                JOptionPane.showMessageDialog(this, "Məhsul məlumatları uğurla yeniləndi");
+//
+//                TextMalinAdi.setText("");
+//                TextMalinMiqdari.setText("");
+//                txtQiymet.setText("");
+//                txtMovsumId.setText("");
+//                textKateqoriyaId.setText("");
+//                txtAltKateqoriyaID.setText("");
+//
+//                txtID.setText("");
+//
+//                boolean cem = txtCemMebleg.getText().isEmpty();
+//
+//                if (cem != true) {
+//
+//                    double umumi = Double.parseDouble(txtUmumi.getText());
+//                    double cem6 = Double.parseDouble(txtCemMebleg.getText());
+//                    double cem2 = cem6 + umumi;
+//                    txtCemMebleg.setText(Double.toString(cem2));
+//                    txtUmumi.setText("");
+//                } else if (cem == true) {
+//                    txtCemMebleg.setText(Double.toString(umumiMebleg));
+//                    txtUmumi.setText("");
+//                    TextMalinAdi.requestFocus();
+//
+//                }
+//
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Satici_Elave_Etmek.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     public void deleteAndUpdate() {
 
@@ -3125,6 +3132,27 @@ public class Main extends javax.swing.JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private class ActionListenerImpl implements ActionListener {
+
+        public ActionListenerImpl() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if (e.getSource() == Saticilar) {
+                try {
+                    Satici_Elave_Etmek satici = new Satici_Elave_Etmek();
+                    satici.setVisible(true);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        }
     }
 
 }
