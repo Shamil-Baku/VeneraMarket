@@ -5,7 +5,7 @@
  */
 package com.mycompany.qarisiqmallar.veneramarket;
 
-import com.aspose.pdf.internal.html.drawing.Numeric;
+
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
