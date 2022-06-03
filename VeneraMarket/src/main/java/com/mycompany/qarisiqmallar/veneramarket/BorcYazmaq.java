@@ -559,15 +559,6 @@ public class BorcYazmaq extends javax.swing.JFrame {
                         pres.setInt(5, ID);
                         pres.executeUpdate();
 
-                        pres = con.prepareStatement("update mehsullar set Satis_miqdari = Satis_miqdari + ?  where id = ?;");
-                        pres.setDouble(1, Miqdari);
-                        pres.setInt(2, ID);
-                        pres.executeUpdate();
-
-                        pres = con.prepareStatement("update mehsullar set Qaliq_say = Miqdari - Satis_miqdari  where id = ?;");
-                        pres.setInt(1, ID);
-                        pres.executeUpdate();
-
                     }
 
                 }
@@ -654,8 +645,8 @@ public class BorcYazmaq extends javax.swing.JFrame {
             int ID;
             double Qiymeti, UmumiMebleg, QismenOdenis, QaliqBorc, Miqdari;
             String BorcAlaninAdi, Mehsul, Tarix;
+
             try {
-                connect();
 
                 for (int i = 0; i < df.getRowCount(); i++) {
 
@@ -702,6 +693,27 @@ public class BorcYazmaq extends javax.swing.JFrame {
                         pres.execute();
 
                     }
+                }
+
+                String query222 = "SELECT s.id, s.Malin_adi, s.Miqdari, s.Satis_qiymeti, s.Umumi_Mebleg, s.Borc_alanin_adi, s.Qismen_Odenis, s.Qaliq_borc, s.Tarix from sebet s";
+                stmt = con.createStatement();
+                stmt.execute(query222);
+                ResultSet rs = stmt.getResultSet();
+
+                while (rs.next()) {
+
+                    int ID2 = rs.getInt("id");
+                    int Miqdari2 = rs.getInt("Miqdari");
+
+                    pres = con.prepareStatement("update mehsullar set Satis_miqdari = Satis_miqdari + ?  where id = ?;");
+                    pres.setDouble(1, Miqdari2);
+                    pres.setInt(2, ID2);
+                    pres.executeUpdate();
+
+                    pres = con.prepareStatement("update mehsullar set Qaliq_say = Miqdari - Satis_miqdari  where id = ?;");
+                    pres.setInt(1, ID2);
+                    pres.executeUpdate();
+
                 }
 
                 sebetinSilinmesi();
