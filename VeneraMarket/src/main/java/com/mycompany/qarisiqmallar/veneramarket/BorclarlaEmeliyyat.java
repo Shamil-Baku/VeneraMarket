@@ -93,6 +93,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtBorcID = new javax.swing.JTextField();
+        chcBoxHamisi = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         Bagla = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -173,6 +174,8 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
         txtQiymeti.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
+        tblBorcSiyahisi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        tblBorcSiyahisi.setForeground(new java.awt.Color(0, 0, 0));
         tblBorcSiyahisi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -189,14 +192,15 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        tblBorcSiyahisi.setColumnSelectionAllowed(true);
+        tblBorcSiyahisi.setGridColor(java.awt.SystemColor.activeCaption);
+        tblBorcSiyahisi.setRowHeight(28);
+        tblBorcSiyahisi.setShowGrid(true);
         tblBorcSiyahisi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblBorcSiyahisiMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblBorcSiyahisi);
-        tblBorcSiyahisi.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         if (tblBorcSiyahisi.getColumnModel().getColumnCount() > 0) {
             tblBorcSiyahisi.getColumnModel().getColumn(0).setMinWidth(100);
             tblBorcSiyahisi.getColumnModel().getColumn(0).setPreferredWidth(140);
@@ -277,7 +281,8 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
             }
         });
 
-        txtOdenisTarixi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtOdenisTarixi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtOdenisTarixi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -290,6 +295,16 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
         jLabel12.setText("BorcID");
 
         txtBorcID.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        chcBoxHamisi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        chcBoxHamisi.setForeground(new java.awt.Color(255, 255, 255));
+        chcBoxHamisi.setText("Hamısı");
+        chcBoxHamisi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chcBoxHamisi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chcBoxHamisiMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -310,40 +325,44 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAxtaris, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                         .addComponent(txtBorc, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtUmumiBorc, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtBorcID))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtQismenOdenis, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtMiqdari)
-                                    .addComponent(txtQaliqBorc)
-                                    .addComponent(txtUmumiMebleg)
-                                    .addComponent(txtQiymeti)
-                                    .addComponent(txtOdenis, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtOdenisTarixi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(txtBorcID, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGap(30, 30, 30)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtQismenOdenis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                        .addComponent(txtMiqdari)
+                                        .addComponent(txtQaliqBorc)
+                                        .addComponent(txtUmumiMebleg)
+                                        .addComponent(txtQiymeti)
+                                        .addComponent(txtOdenis, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtOdenisTarixi, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(chcBoxHamisi, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -369,7 +388,9 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                         .addComponent(txtBorc)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,11 +424,12 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                             .addComponent(txtOdenis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chcBoxHamisi, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtOdenisTarixi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 94, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(12, 12, 12))))
         );
 
         jButton2.setBackground(new java.awt.Color(51, 255, 51));
@@ -702,18 +724,135 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
     }
 
-    public void borcunSilinmesi() throws SQLException {
+    public void satis2() {
+
+        String ID, Miqdari, Ümumi_Məbləğ;
+
+        try {
+            df = (DefaultTableModel) tblBorcSiyahisi.getModel();
+            Double qaliqBorc;
+
+            for (int i = 0; i < df.getRowCount(); i++) {
+
+                qaliqBorc = Double.parseDouble(df.getValueAt(i, 8).toString());
+
+                if (qaliqBorc == 0.00) {
+
+                    ID = df.getValueAt(i, 2).toString();
+                    Miqdari = df.getValueAt(i, 4).toString();
+                    Ümumi_Məbləğ = df.getValueAt(i, 6).toString();
+
+                    String query2 = "update mehsullar set Satisin_toplam_deyeri = Satisin_toplam_deyeri + ? where id = ?";
+
+                    pres = con.prepareStatement(query2);
+
+                    // pres.setString(1, Miqdari);
+                    pres.setString(1, Ümumi_Məbləğ);
+                    pres.setString(2, ID);
+                    pres.executeUpdate();
+
+                }
+
+            }
+            borcunSilinmesi();
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public void borcunSilinmesi2() {
 
         double QaliqBorc2, qiymeti, umumimebleg, qismenOdenis, Miqdari;
         String borcAlaninAdi, Mehsul, SatisTarixi;
         int MehsulID, BorcID;
 
-        try {
-            connect();
+        df = (DefaultTableModel) tblBorcSiyahisi.getModel();
+        double QaliqBorc;
 
-        } catch (Exception ex) {
-            Logger.getLogger(BorclarlaEmeliyyat.class.getName()).log(Level.SEVERE, null, ex);
+        //int selected = tblBorcSiyahisi.getSelectedRow();
+        for (int i = 0; i < df.getRowCount(); i++) {
+
+            QaliqBorc = Double.parseDouble(df.getValueAt(i, 8).toString());
+
+            if (QaliqBorc == 0.00) {
+
+                df = (DefaultTableModel) tblBorcSiyahisi.getModel();
+
+                borcAlaninAdi = df.getValueAt(i, 0).toString();
+                Mehsul = df.getValueAt(i, 1).toString();
+                MehsulID = Integer.parseInt(df.getValueAt(i, 2).toString());
+                Miqdari = Double.parseDouble(df.getValueAt(i, 4).toString());
+                qiymeti = Double.parseDouble(df.getValueAt(i, 5).toString());
+                umumimebleg = Double.parseDouble(df.getValueAt(i, 6).toString());
+                qismenOdenis = Double.parseDouble(df.getValueAt(i, 7).toString());
+                SatisTarixi = df.getValueAt(i, 10).toString();
+
+                try {
+
+                    int say = 1;
+                    Statement stmt = con.createStatement();
+                    stmt.execute("select * from satilan_mallar");
+                    ResultSet rs = stmt.getResultSet();
+                    while (rs.next()) {
+                        say++;
+                    }
+
+                    String query = "insert into satilan_mallar (Satis_ID, id, Malin_adi, Miqdari, Satis_qiymeti,  Umumi_Mebleg, Satis_Tarixi, Borcdan_Gelen, QiemenOdenis, Borc_Alanin_Adi) values(?,?,?,?,?,?,?,?,?,?)";
+
+                    pres = con.prepareStatement(query);
+
+                    //pres.setString(1, BorcAlaninAdi);
+                    pres.setInt(1, say);
+                    pres.setInt(2, MehsulID);
+                    pres.setString(3, "Borcdan-" + Mehsul);
+                    pres.setDouble(4, Miqdari);
+                    pres.setDouble(5, qiymeti);
+                    pres.setDouble(6, umumimebleg);
+                    pres.setString(7, SatisTarixi);
+                    pres.setDouble(8, umumimebleg);
+                    pres.setDouble(9, qismenOdenis);
+                    pres.setString(10, borcAlaninAdi);
+                    pres.execute();
+
+                    df = (DefaultTableModel) tblBorcSiyahisi.getModel();
+
+                    for (int i2 = 0; i2 < df.getRowCount(); i2++) {
+
+                        MehsulID = Integer.parseInt(df.getValueAt(i, 2).toString());
+                        BorcID = Integer.parseInt(df.getValueAt(i, 3).toString());
+                        QaliqBorc = Double.parseDouble(df.getValueAt(i, 8).toString());
+
+                        if (QaliqBorc == 0.00) {
+
+                            String querySilinme = "delete from borclar_siyahisi where id = " + BorcID;
+                            stmt = con.createStatement();
+                            stmt.execute(querySilinme);
+
+                            JOptionPane.showMessageDialog(this, "Borc ugurla silindi!");
+                            txtUmumiBorc.setText("");
+                            txtBorc.setText("");
+                            loadAxtarisaGore();
+
+                        }
+
+                    }
+                } catch (Exception ex) {
+
+                }
+
+            } else {
+
+            }
+
         }
+
+    }
+
+    public void borcunSilinmesi() throws SQLException {
+
+        double QaliqBorc2, qiymeti, umumimebleg, qismenOdenis, Miqdari;
+        String borcAlaninAdi, Mehsul, SatisTarixi;
+        int MehsulID, BorcID;
 
         df = (DefaultTableModel) tblBorcSiyahisi.getModel();
         double QaliqBorc;
@@ -760,35 +899,41 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                 pres.setDouble(9, qismenOdenis);
                 pres.setString(10, borcAlaninAdi);
                 pres.execute();
+            }
+        }
+        df = (DefaultTableModel) tblBorcSiyahisi.getModel();
 
-                df = (DefaultTableModel) tblBorcSiyahisi.getModel();
+        for (int i2 = 0; i2 < df.getRowCount(); i2++) {
 
-                for (int i2 = 0; i2 < df.getRowCount(); i2++) {
+            MehsulID = Integer.parseInt(df.getValueAt(i2, 2).toString());
+            BorcID = Integer.parseInt(df.getValueAt(i2, 3).toString());
+            QaliqBorc = Double.parseDouble(df.getValueAt(i2, 8).toString());
 
-                    MehsulID = Integer.parseInt(df.getValueAt(i, 2).toString());
-                    BorcID = Integer.parseInt(df.getValueAt(i, 3).toString());
-                    QaliqBorc = Double.parseDouble(df.getValueAt(i, 8).toString());
+            if (QaliqBorc == 0.00) {
 
-                    if (QaliqBorc == 0.00) {
+                String querySilinme = "delete from borclar_siyahisi where id = " + BorcID;
+                stmt = con.createStatement();
+                stmt.execute(querySilinme);
 
-                        String querySilinme = "delete from borclar_siyahisi where id = " + BorcID;
-                        stmt = con.createStatement();
-                        stmt.execute(querySilinme);
-
-                        JOptionPane.showMessageDialog(this, "Borc ugurla silindi!");
-                        txtUmumiBorc.setText("");
-                        txtBorc.setText("");
-                        loadAxtarisaGore();
-
-                    }
-
-                }
-
-            } else {
+                txtUmumiBorc.setText("");
+                txtBorc.setText("");
+                txtID.setText("");
+                txtBorcID.setText("");
+                txtMiqdari.setText("");
+                txtQiymeti.setText("");
+                txtUmumiMebleg.setText("");
+                txtQismenOdenis.setText("");
+                txtQaliqBorc.setText("");
+                txtOdenis.setText("");
+                txtMehsul.setText("");
+                chcBoxHamisi.doClick();
+                //loadAxtarisaGore();
 
             }
 
         }
+
+        JOptionPane.showMessageDialog(this, "Borc ugurla silindi!");
 
     }
 
@@ -920,66 +1065,110 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
     private void odenisEt() {
 
         try {
-            if (txtBorcAlaninAdi.getText().isEmpty() || txtMehsul.getText().isEmpty() || txtID.getText().isEmpty() || txtMiqdari.getText().isEmpty() || txtQiymeti.getText().isEmpty() || txtUmumiMebleg.getText().isEmpty() || txtQismenOdenis.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(this, "Zəhmət olmasa bütün melumatları daxil edin!");
-                return;
-            }
+            boolean check = chcBoxHamisi.isSelected();
 
-            if (txtOdenis.getText().isBlank()) {
-                JOptionPane.showMessageDialog(this, "Zəhmət olmasa ödeniş miqdarını daxil edin!");
-            } else {
+            if (check == true) {
 
-                if (hesabla() == 0) {
+                String BorcAlaninAdi = txtBorcAlaninAdi.getText();
 
-                    String BorcAlaninAdi = txtBorcAlaninAdi.getText();
-                    String Mehsul = txtMehsul.getText();
-                    int ID = Integer.parseInt(txtID.getText());
-                    int IDBorc = Integer.parseInt(txtBorcID.getText());
-                    double Miqdari = Double.parseDouble(txtMiqdari.getText());
-                    double Qiymeti = Double.parseDouble(txtQiymeti.getText());
-                    double UmumiMebleg = Double.parseDouble(txtUmumiMebleg.getText());
-                    double QismenOdenis = Double.parseDouble(txtQismenOdenis.getText());
-                    double QaliqBorc = Double.parseDouble(txtQaliqBorc.getText());
-                    String odenisTarixi = txtOdenisTarixi.getText();
+                if (txtBorcAlaninAdi.getText().isBlank()) {
 
-                    pres = con.prepareStatement("update borclar_siyahisi set Borc_alanin_adi = ?, Borca_goturduyu_mehsul=?, Mehsul_ID =?, Miqdari=?, Qiymeti=?, Umumi_mebleg=?, Qismen_odenis =?, Qaliq_borc=?, Borc_odeme_tarixi=?  where id = ?");
+                    JOptionPane.showMessageDialog(this, "Zehmet olmasa Borc alanin adini qeyd edin! ");
 
-                    pres.setString(1, BorcAlaninAdi);
-                    pres.setString(2, Mehsul);
-                    pres.setInt(3, ID);
-                    pres.setDouble(4, Miqdari);
-                    pres.setDouble(5, Qiymeti);
-                    pres.setDouble(6, UmumiMebleg);
-                    pres.setDouble(7, QismenOdenis);
-                    pres.setDouble(8, QaliqBorc);
-                    pres.setString(9, odenisTarixi);
-                    pres.setInt(10, IDBorc);
+                    return;
+                }
 
+                pres = con.prepareCall("select * from borclar_siyahisi where Borc_alanin_adi = " + "'" + BorcAlaninAdi + "'");
+
+                ResultSet rs = pres.executeQuery();
+
+                while (rs.next()) {
+
+                    double Umumi = rs.getDouble("Umumi_mebleg");
+                    int borcID = rs.getInt("id");
+                    double qismen = rs.getDouble("Qismen_odenis");
+                    double qaliq = rs.getDouble("Qaliq_borc");
+                    String date = txtOdenisTarixi.getText();
+
+                    pres = con.prepareStatement("update borclar_siyahisi set Qismen_odenis =?, Qaliq_borc=?, Borc_odeme_tarixi=?  where id = ?");
+
+                    pres.setDouble(1, qaliq);
+                    pres.setDouble(2, 0.0);
+                    pres.setString(3, date);
+                    pres.setInt(4, borcID);
                     pres.executeUpdate();
 
-                    load();
-                    loadAxtarisaGore();
-                    satis();
-                    borcGostericileri2();
-                    txtUmumiBorc.setText("");
-                    borcGostericileri();
-                    System.out.println("");
-
-                    txtID.setText("");
-                    txtBorcID.setText("");
-                    txtMiqdari.setText("");
-                    txtQiymeti.setText("");
-                    txtUmumiMebleg.setText("");
-                    txtQismenOdenis.setText("");
-                    txtQaliqBorc.setText("");
-                    txtOdenis.setText("");
-
                 }
+
+                load();
+                loadAxtarisaGore();
+                satis2();
+                borcGostericileri2();
+                txtUmumiBorc.setText("");
+                load();
+                loadAxtarisaGore();
+                borcGostericileri();
+
+            } else {
+
+                if (txtBorcAlaninAdi.getText().isEmpty() || txtMehsul.getText().isEmpty() || txtID.getText().isEmpty() || txtMiqdari.getText().isEmpty() || txtQiymeti.getText().isEmpty() || txtUmumiMebleg.getText().isEmpty() || txtQismenOdenis.getText().isEmpty()) {
+
+                    JOptionPane.showMessageDialog(this, "Zəhmət olmasa bütün melumatları daxil edin!");
+                    return;
+                }
+
+                if (txtOdenis.getText().isBlank()) {
+                    JOptionPane.showMessageDialog(this, "Zəhmət olmasa ödeniş miqdarını daxil edin!");
+                } else {
+
+                    if (hesabla() == 0) {
+
+                        String BorcAlaninAdi = txtBorcAlaninAdi.getText();
+                        String Mehsul = txtMehsul.getText();
+                        int ID = Integer.parseInt(txtID.getText());
+                        int IDBorc = Integer.parseInt(txtBorcID.getText());
+                        double Miqdari = Double.parseDouble(txtMiqdari.getText());
+                        double Qiymeti = Double.parseDouble(txtQiymeti.getText());
+                        double UmumiMebleg = Double.parseDouble(txtUmumiMebleg.getText());
+                        double QismenOdenis = Double.parseDouble(txtQismenOdenis.getText());
+                        double QaliqBorc = Double.parseDouble(txtQaliqBorc.getText());
+                        String odenisTarixi = txtOdenisTarixi.getText();
+
+                        pres = con.prepareStatement("update borclar_siyahisi set  Umumi_mebleg=?, Qismen_odenis =?, Qaliq_borc=?, Borc_odeme_tarixi=?  where id = ?");
+
+                        pres.setDouble(1, UmumiMebleg);
+                        pres.setDouble(2, QismenOdenis);
+                        pres.setDouble(3, QaliqBorc);
+                        pres.setString(4, odenisTarixi);
+                        pres.setInt(5, IDBorc);
+                        pres.executeUpdate();
+
+                        load();
+                        loadAxtarisaGore();
+                        satis();
+                        borcGostericileri2();
+                        txtUmumiBorc.setText("");
+                        borcGostericileri();
+                        System.out.println("");
+
+                        txtID.setText("");
+                        txtBorcID.setText("");
+                        txtMiqdari.setText("");
+                        txtQiymeti.setText("");
+                        txtUmumiMebleg.setText("");
+                        txtQismenOdenis.setText("");
+                        txtQaliqBorc.setText("");
+                        txtOdenis.setText("");
+
+                    }
+                }
+
             }
-            // borcunSilinmesi();
+
         } catch (HeadlessException | NumberFormatException | SQLException ex) {
-            System.out.println(ex);
+
+            ex.printStackTrace();
 
         }
 
@@ -987,7 +1176,6 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
     private void borcGostericileri2() {
 
-       
         txtBorc.setText("");
 
     }
@@ -1049,7 +1237,6 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
         txtBorcAlaninAdi.setText("");
         txtMehsul.setText("");
         borcGostericileri();
-
     }//GEN-LAST:event_txtAxtarisKeyReleased
 
 
@@ -1158,6 +1345,19 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
         txtMehsul.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void chcBoxHamisiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chcBoxHamisiMouseClicked
+
+        boolean check = txtOdenis.isEnabled();
+
+        if (check == false) {
+
+            txtOdenis.enable();
+        } else {
+            txtOdenis.setText("");
+            txtOdenis.disable();
+        }
+    }//GEN-LAST:event_chcBoxHamisiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1195,6 +1395,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bagla;
+    private javax.swing.JCheckBox chcBoxHamisi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
