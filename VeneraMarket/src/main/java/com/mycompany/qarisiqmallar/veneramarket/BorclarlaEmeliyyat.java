@@ -5,7 +5,6 @@
  */
 package com.mycompany.qarisiqmallar.veneramarket;
 
-
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -654,7 +653,7 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                     pres.setString(1, Ümumi_Məbləğ);
                     pres.setString(2, ID);
                     pres.executeUpdate();
-                    borcunSilinmesi();
+                    borcunSilinmesi2();
 
                 }
                 if (!txtOdenis.getText().isEmpty()) {
@@ -814,37 +813,51 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                     pres.setString(10, borcAlaninAdi);
                     pres.execute();
 
-                    df = (DefaultTableModel) tblBorcSiyahisi.getModel();
-
-                    for (int i2 = 0; i2 < df.getRowCount(); i2++) {
-
-                        MehsulID = Integer.parseInt(df.getValueAt(i, 2).toString());
-                        BorcID = Integer.parseInt(df.getValueAt(i, 3).toString());
-                        QaliqBorc = Double.parseDouble(df.getValueAt(i, 8).toString());
-
-                        if (QaliqBorc == 0.00) {
-
-                            String querySilinme = "delete from borclar_siyahisi where id = " + BorcID;
-                            stmt = con.createStatement();
-                            stmt.execute(querySilinme);
-
-                            JOptionPane.showMessageDialog(this, "Borc ugurla silindi!");
-                            txtUmumiBorc.setText("");
-                            txtBorc.setText("");
-                            loadAxtarisaGore();
-
-                        }
-
-                    }
-                } catch (Exception ex) {
+                } catch (SQLException ex) {
 
                 }
-
-            } else {
 
             }
 
         }
+        df = (DefaultTableModel) tblBorcSiyahisi.getModel();
+
+        for (int i2 = 0; i2 < df.getRowCount(); i2++) {
+
+            MehsulID = Integer.parseInt(df.getValueAt(i2, 2).toString());
+            BorcID = Integer.parseInt(df.getValueAt(i2, 3).toString());
+            QaliqBorc = Double.parseDouble(df.getValueAt(i2, 8).toString());
+
+            try {
+
+                if (QaliqBorc == 0.00) {
+
+                    String querySilinme = "delete from borclar_siyahisi where id = " + BorcID;
+                    stmt = con.createStatement();
+                    stmt.execute(querySilinme);
+
+                    txtUmumiBorc.setText("");
+                    txtBorc.setText("");
+                    txtID.setText("");
+                    txtBorcID.setText("");
+                    txtMiqdari.setText("");
+                    txtQiymeti.setText("");
+                    txtUmumiMebleg.setText("");
+                    txtQismenOdenis.setText("");
+                    txtQaliqBorc.setText("");
+                    txtOdenis.setText("");
+                    txtMehsul.setText("");
+
+                    //loadAxtarisaGore();
+                }
+
+            } catch (Exception ex) {
+
+            }
+
+        }
+
+        JOptionPane.showMessageDialog(this, "Borc ugurla silindi!");
 
     }
 
@@ -1147,11 +1160,12 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
                         load();
                         loadAxtarisaGore();
                         satis();
+                        loadAxtarisaGore();
                         borcGostericileri2();
                         txtUmumiBorc.setText("");
                         borcGostericileri();
-                        System.out.println("");
 
+                        txtBorcAlaninAdi.setText("");
                         txtID.setText("");
                         txtBorcID.setText("");
                         txtMiqdari.setText("");
@@ -1350,7 +1364,6 @@ public class BorclarlaEmeliyyat extends javax.swing.JFrame {
         boolean check = txtOdenis.isEnabled();
 
         if (check == false) {
-
             txtOdenis.enable();
         } else {
             txtOdenis.setText("");
