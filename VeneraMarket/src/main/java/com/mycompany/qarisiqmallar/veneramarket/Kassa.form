@@ -495,7 +495,7 @@
                   <Table columnCount="16" rowCount="0">
                     <Column editable="true" title="ID" type="java.lang.Integer"/>
                     <Column editable="true" title="Malin Adi" type="java.lang.String"/>
-                    <Column editable="true" title="Satis Miqdari" type="java.lang.Integer"/>
+                    <Column editable="true" title="Satis Miqdari" type="java.lang.Double"/>
                     <Column editable="true" title="Satis Meblegi Cem" type="java.lang.Double"/>
                     <Column editable="true" title="Alis Qiymeti" type="java.lang.Double"/>
                     <Column editable="true" title="Satis Qiymeti" type="java.lang.Double"/>
