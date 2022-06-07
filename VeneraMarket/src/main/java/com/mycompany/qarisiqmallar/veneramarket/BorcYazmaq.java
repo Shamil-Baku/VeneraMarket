@@ -547,7 +547,7 @@ public class BorcYazmaq extends javax.swing.JFrame {
                         double qismenOdenis = 0;
                         String BorcAlaninAdi = txtBorcAlaninAdi.getText();
                         int ID = rs.getInt("id");
-                        int Miqdari = rs.getInt("Miqdari");
+                        double Miqdari = rs.getDouble("Miqdari");
                         double satisQiymeti = rs.getDouble("Satis_qiymeti");
 
                         pres = con.prepareStatement("update sebet set id = ?, Borc_alanin_adi=?, Qismen_Odenis=?, Qaliq_borc =? where id = ?");
@@ -578,7 +578,7 @@ public class BorcYazmaq extends javax.swing.JFrame {
                         String BorcAlaninAdi = txtBorcAlaninAdi.getText();
                         double qismenOdenis = Double.parseDouble(txtQismenOdenis.getText());
                         int ID = rs.getInt("id");
-                        int Miqdari = rs.getInt("Miqdari");
+                        double Miqdari = rs.getDouble("Miqdari");
                         double satisQiymeti = rs.getDouble("Satis_qiymeti");
 
                         if (qismenOdenis > 0) {
@@ -604,7 +604,7 @@ public class BorcYazmaq extends javax.swing.JFrame {
                             double qismenOdenis2 = 0;
                             String BorcAlaninAdi2 = txtBorcAlaninAdi.getText();
                             int ID2 = rs.getInt("id");
-                            int Miqdari2 = rs.getInt("Miqdari");
+                            double Miqdari2 = rs.getDouble("Miqdari");
                             double satisQiymeti2 = rs.getDouble("Satis_qiymeti");
 
                             pres = con.prepareStatement("update sebet set id = ?, Borc_alanin_adi=?, Qismen_Odenis=?, Qaliq_borc =? where id = ?");
