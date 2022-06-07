@@ -484,7 +484,6 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\Delete-icon.png")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -657,7 +656,8 @@ public class MehsulDeyisdirilmesi extends javax.swing.JFrame {
         btnSil.setBackground(new java.awt.Color(255, 51, 0));
         btnSil.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnSil.setForeground(new java.awt.Color(255, 255, 255));
-        btnSil.setIcon(new javax.swing.ImageIcon("C:\\git projects\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\Delete-icon.png")); // NOI18N
+        btnSil.setIcon(new javax.swing.ImageIcon("C:\\GitHubProject\\VeneraMarket-2\\VeneraMarket\\src\\main\\java\\pictures\\Delete-icon.png")); // NOI18N
+        btnSil.setText("Sil");
         btnSil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSilActionPerformed(evt);
