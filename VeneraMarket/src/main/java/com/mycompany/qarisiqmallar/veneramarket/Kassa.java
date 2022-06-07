@@ -345,7 +345,7 @@ public class Kassa extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -498,7 +498,7 @@ public class Kassa extends javax.swing.JFrame {
                 for (int i = 0; i < a; i++) {
                    v2.add(rs.getInt("id"));
                     v2.add(rs.getString("Malin_adi"));
-                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Miqdari"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
                     v2.add(rs.getDouble("Alis_qiymeti"));
                     v2.add(rs.getDouble("Satis_qiymeti"));
@@ -565,7 +565,7 @@ public class Kassa extends javax.swing.JFrame {
                 for (int i = 0; i < a; i++) {
                     v2.add(rs.getInt("id"));
                     v2.add(rs.getString("Malin_adi"));
-                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Miqdari"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
                     v2.add(rs.getDouble("Alis_qiymeti"));
                     v2.add(rs.getDouble("Satis_qiymeti"));
@@ -641,7 +641,7 @@ public class Kassa extends javax.swing.JFrame {
                 for (int i = 0; i < a; i++) {
                     v2.add(rs.getInt("id"));
                     v2.add(rs.getString("Malin_adi"));
-                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Miqdari"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
                     v2.add(rs.getDouble("Alis_qiymeti"));
                     v2.add(rs.getDouble("Satis_qiymeti"));
@@ -715,7 +715,7 @@ public class Kassa extends javax.swing.JFrame {
                 for (int i = 0; i < a; i++) {
                     v2.add(rs.getInt("id"));
                     v2.add(rs.getString("Malin_adi"));
-                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Miqdari"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
                     v2.add(rs.getDouble("Alis_qiymeti"));
                     v2.add(rs.getDouble("Satis_qiymeti"));
@@ -800,7 +800,7 @@ public class Kassa extends javax.swing.JFrame {
                 for (int i = 0; i < a; i++) {
                     v2.add(rs.getInt("id"));
                     v2.add(rs.getString("Malin_adi"));
-                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Miqdari"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
                     v2.add(rs.getDouble("Alis_qiymeti"));
                     v2.add(rs.getDouble("Satis_qiymeti"));
@@ -872,7 +872,7 @@ public class Kassa extends javax.swing.JFrame {
 
             if (yoxla1 != false) {
               
-                double umumiSatis = SatisQiymeti * Miqdari - musteriyeGeriQaytarilanMebleg  + qismenOdenis - borcdanGelen;
+                double umumiSatis = SatisQiymeti * Miqdari - musteriyeGeriQaytarilanMebleg  + qismenOdenis - (borcdanGelen);
                 
                 String formatted = dformater.format(umumiSatis);
                 
@@ -962,7 +962,7 @@ public class Kassa extends javax.swing.JFrame {
                 for (int i = 0; i < a; i++) {
                     v2.add(rs.getInt("id"));
                     v2.add(rs.getString("Malin_adi"));
-                    v2.add(rs.getInt("Miqdari"));
+                    v2.add(rs.getDouble("Miqdari"));
                     v2.add(rs.getDouble("Satis_Meblegi_Cem"));
                     v2.add(rs.getDouble("Alis_qiymeti"));
                     v2.add(rs.getDouble("Satis_qiymeti"));
